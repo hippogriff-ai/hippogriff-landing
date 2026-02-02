@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.34.0",
     "gray-matter": "^4.0.3",
     "next": "^15.1.0",
     "react": "^19.0.0",

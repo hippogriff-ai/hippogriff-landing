@@ -1,10 +1,31 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BackButton from '@/components/BackButton';
 import { getPostBySlug, getAllSlugs } from '@/lib/blog';
-import Link from 'next/link';
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      publishedTime: post.date,
+    },
+  };
 }
 
 export default async function BlogPost({
@@ -19,9 +40,7 @@ export default async function BlogPost({
     <main>
       <Navbar />
       <article className="blog-post">
-        <Link href="/blog" className="blog-post-back">
-          &larr; Back to writing
-        </Link>
+        <BackButton />
         <h1 className="blog-post-title">{post.title}</h1>
         <div className="blog-post-date">{post.date}</div>
         <div

@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import BlogCard from '@/components/BlogCard';
 import Footer from '@/components/Footer';
 import { getAllPosts } from '@/lib/blog';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Posts on design, engineering, and building things — by Vicki Zhang.',
+};
 
 export default function BlogListing() {
   const posts = getAllPosts();
@@ -10,7 +16,7 @@ export default function BlogListing() {
     <main>
       <Navbar />
       <div className="blog-listing">
-        <h1 className="blog-listing-title">Writing</h1>
+        <h1 className="blog-listing-title">Blog</h1>
         <div className="blog-listing-grid">
           {posts.map((post) => (
             <BlogCard

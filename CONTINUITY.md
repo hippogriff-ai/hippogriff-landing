@@ -21,30 +21,31 @@ Build hippogriff.io landing page — personal maker brand portfolio with flat ca
 
 ## State:
   - Done:
-    - Phase 1: Scaffolding (package.json, tsconfig, next.config.ts)
-    - Phase 2: Root layout + globals.css (all styles, responsive breakpoints)
-    - Phase 3: Static components (Navbar, Header, Footer, ProjectCard, page.tsx)
-    - Phase 4: InvaderCanvas client component (MiniInvader class, retina, cleanup)
-    - Phase 5: Blog lib (blog.ts) + 4 markdown posts
-    - Phase 6: BlogCard, BlogPreview, homepage integration
-    - Phase 7: Blog routes (/blog listing + /blog/[slug] with generateStaticParams)
-    - Phase 8: Build verified — 9 static pages in out/
+    - Phases 1-8: Full site build (scaffold, layout, components, blog, verified)
+    - Phase 9: About section on homepage (between blog and footer)
+    - Phase 10: SEO metadata (layout OG/Twitter, blog listing metadata, blog post generateMetadata, robots.txt, llms.txt)
+    - Phase 11: Amplitude analytics (@amplitude/analytics-browser, AmplitudeProvider, page_view/page_exit/link_click events, time-on-page tracking)
   - Now:
-    - All phases complete. Build passes. Ready for user review.
+    - All phases complete. Build passes (6 static pages). Ready for user review.
   - Next:
     - User visual review / iteration
+    - Set NEXT_PUBLIC_AMPLITUDE_API_KEY in Vercel env
     - Deploy to Vercel
 
 ## Open questions (UNCONFIRMED if needed):
 - Footer github link URL (currently placeholder https://github.com/hippogriff-io)
+- About section text is placeholder — Vicki to finalize
 
 ## Working set (files/ids/commands):
-- src/app/page.tsx (homepage)
-- src/app/layout.tsx (root layout)
-- src/app/globals.css (all styles)
-- src/app/blog/page.tsx (blog listing)
-- src/app/blog/[slug]/page.tsx (blog post)
-- src/components/{Navbar,Header,Footer,ProjectCard,InvaderCanvas,BlogCard,BlogPreview}.tsx
+- src/app/page.tsx (homepage — now includes About section)
+- src/app/layout.tsx (root layout — SEO metadata + AmplitudeProvider)
+- src/app/globals.css (all styles — includes .about styles)
+- src/app/blog/page.tsx (blog listing — page metadata)
+- src/app/blog/[slug]/page.tsx (blog post — generateMetadata)
+- src/components/{Navbar,Header,Footer,ProjectCard,InvaderCanvas,BlogCard,BlogPreview,AmplitudeProvider,BackButton}.tsx
 - src/lib/blog.ts (markdown processing)
-- content/blog/*.md (4 posts)
+- src/lib/amplitude.ts (analytics helpers)
+- content/blog/*.md (posts)
+- public/robots.txt, public/llms.txt
+- .env.example
 - next.config.ts (output: 'export')

@@ -8,7 +8,7 @@ export default function BlogPreview() {
   return (
     <section className="blog-section">
       <div className="blog-header">
-        <div className="blog-label">writing</div>
+        <div className="blog-label">blog</div>
         <Link href="/blog" className="blog-more">
           See more &rarr;
         </Link>

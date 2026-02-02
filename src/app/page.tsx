@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import Navbar from '@/components/Navbar';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
@@ -7,13 +9,20 @@ import Footer from '@/components/Footer';
 const PROJECTS = [
   {
     name: 'TypeCraft',
-    desc: 'A Space Invaders typing game that finds your weak keys',
+    desc: 'A Space Invaders typing game that makes you faster',
     url: 'https://typecraft.hippogriff.io',
     hasAnimation: true,
   },
 ];
 
+function getAboutText(): string {
+  const filePath = path.join(process.cwd(), 'content/about.md');
+  return fs.readFileSync(filePath, 'utf8').trim();
+}
+
 export default function Home() {
+  const aboutText = getAboutText();
+
   return (
     <main>
       <Navbar />
@@ -29,6 +38,11 @@ export default function Home() {
       </section>
 
       <BlogPreview />
+
+      <section className="about" id="about">
+        <div className="about-label">about</div>
+        <p className="about-text">{aboutText}</p>
+      </section>
 
       <Footer />
     </main>

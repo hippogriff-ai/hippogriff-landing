@@ -1,7 +1,7 @@
 ---
 title: "Why I built TypeCraft"
 date: "2026-01-31"
-excerpt: "Typing speed matters and some educational game encourages sustained growth"
+excerpt: "Daily grind becomes daily play"
 pinned: true
 ---
 ## The problem I had
