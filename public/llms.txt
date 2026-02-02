@@ -1,13 +1,13 @@
 # Hippogriff — hippogriff.io
 
 ## About
-Hippogriff is the personal workshop of Vicki Zhang — a home for games, agents, and experiments at the intersection of design and engineering.
+Vicki Zhang is a senior full stack software engineer building agents at work and in spare time. Hippogriff.io is a site for things made on the journey of reimagining human & app interaction.
 
 ## Projects
-- TypeCraft: A Space Invaders typing game that makes you faster. https://typecraft.hippogriff.io
+- TypeCraft: A Space Invaders typing game that showcases how a small, well-crafted app can make a routine task more fun. https://typecraft.hippogriff.io
 
 ## Blog
-Posts on design, engineering, and building things. Topics include game development, creative tools, and maker culture.
+Posts on software engineering, AI, agents, and building things.
 
 ## Contact
-GitHub: https://github.com/hippogriff-io
+GitHub: https://github.com/hippogriff-ai

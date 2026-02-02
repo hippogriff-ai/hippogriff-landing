@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     template: '%s | Hippogriff',
   },
   description:
-    'Hippogriff is Vicki Zhang\u2019s workshop \u2014 a home for games, agents, and experiments at the intersection of design and engineering.',
+    'Hippogriff is Vicki Zhang\u2019s site for things made on the journey of reimagining human & app interaction \u2014 agents, games, and experiments powered by AI.',
   openGraph: {
     title: 'Hippogriff',
     description:
-      'Games, agents, and experiments by Vicki Zhang.',
+      'Agents, games, and experiments by Vicki Zhang \u2014 reimagining human & app interaction.',
     url: 'https://hippogriff.io',
     siteName: 'Hippogriff',
     type: 'website',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: 'Hippogriff',
     description:
-      'Games, agents, and experiments by Vicki Zhang.',
+      'Agents, games, and experiments by Vicki Zhang \u2014 reimagining human & app interaction.',
   },
 };
 

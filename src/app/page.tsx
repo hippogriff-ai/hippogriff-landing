@@ -15,13 +15,14 @@ const PROJECTS = [
   },
 ];
 
-function getAboutText(): string {
+function getAboutParagraphs(): string[] {
   const filePath = path.join(process.cwd(), 'content/about.md');
-  return fs.readFileSync(filePath, 'utf8').trim();
+  const raw = fs.readFileSync(filePath, 'utf8').trim();
+  return raw.split(/\n\s*\n/).filter(Boolean);
 }
 
 export default function Home() {
-  const aboutText = getAboutText();
+  const aboutParagraphs = getAboutParagraphs();
 
   return (
     <main>
@@ -41,7 +42,11 @@ export default function Home() {
 
       <section className="about" id="about">
         <div className="about-label">about</div>
-        <p className="about-text">{aboutText}</p>
+        <div className="about-text">
+          {aboutParagraphs.map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
       </section>
 
       <Footer />

@@ -4,7 +4,7 @@ export default function Header() {
       <div className="header-left">
         <h1 className="title">Hippogriff</h1>
         <p className="subtitle">
-          A home for things I built and think of — games, agents, and experiments.
+          A home for things I built and think of — fun apps, agents, and experiments.
         </p>
         <div className="motto">
           &ldquo;Be kind, build something great.&rdquo;
