@@ -185,6 +185,22 @@ main {
   background: rgba(232, 168, 48, 0.03);
 }
 
+.project-card-visual::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(232, 168, 48, 0.08);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card-visual img {
+  filter: brightness(0.85) sepia(15%);
+}
+
 .project-card-visual canvas {
   position: absolute;
   top: 0;
@@ -356,6 +372,17 @@ main {
 
 .about-text p:last-child {
   margin-bottom: 0;
+}
+
+.about-text a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-dim);
+  transition: border-color 0.2s;
+}
+
+.about-text a:hover {
+  border-color: var(--accent);
 }
 
 /* ── Footer ── */
