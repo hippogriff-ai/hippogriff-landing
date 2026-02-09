@@ -1,6 +1,6 @@
 Hi, I'm Vicki Zhang. I am a senior full stack software engineer who is currently building agents at work and also in spare time. I am interested in interested in what's possible when AI reshapes
 daily life. Hippogriff.io is a site for the things I made on the journey of reimagining human & app interaction. Typecraft is the one that showcases how a small, well-crafted app can make a routine task more fun. 
 
-My career story is about constantly evolving. In 2019, I pivoted into software engineering after an M.S. degree in quantitative finance and several years of working in finance. In 2024 I started to build AI-related products as a volunteer duty at work, acting as maintainer for an internal chatbot in the place I work. In 2025, I was lucky enough to start building workflow agent full time thanks to the support from the leadership on a proof of concept that I pitched. 
+My career story is about constantly evolving. In 2019, I pivoted into software engineering after an M.S. degree in quantitative finance and several years of working in finance. In 2024 I started to build AI-related products as a volunteer duty at work, acting as maintainer for an internal chatbot in the place I work. In 2025, I was lucky enough to start building workflow AI agent full time thanks to the support from the leadership on a proof of concept that I pitched. 
 
 Outside of work, I like wine, distance running (finished 4 NYC marathons), weight training, and street photography. And lately, vibe-coding.
