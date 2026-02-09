@@ -13,6 +13,12 @@ const PROJECTS = [
     url: 'https://typecraft.hippogriff.io',
     hasAnimation: true,
   },
+  {
+    name: 'Talent Promo',
+    desc: 'Resume writing agent that discovers your hidden strengths',
+    url: 'https://talent-promo.hippogriff.io',
+    hasAnimation: false,
+  },
 ];
 
 function getAboutParagraphs(): string[] {

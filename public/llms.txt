@@ -5,6 +5,7 @@ Vicki Zhang is a senior full stack software engineer building agents at work and
 
 ## Projects
 - TypeCraft: A Space Invaders typing game that showcases how a small, well-crafted app can make a routine task more fun. https://typecraft.hippogriff.io
+- Talent Promo: Resume writing agent that discovers your hidden strengths. https://talent-promo.hippogriff.io
 
 ## Blog
 Posts on software engineering, AI, agents, and building things.
