@@ -1,5 +1,6 @@
 import * as amplitude from '@amplitude/analytics-browser';
 
+const SITE_NAME = 'hippogriff-landing';
 let initialized = false;
 
 export function initAmplitude() {
@@ -15,6 +16,7 @@ export function initAmplitude() {
 export function trackPageView(pagePath: string, pageTitle?: string) {
   if (!initialized) return;
   amplitude.track('page_view', {
+    site: SITE_NAME,
     page_path: pagePath,
     page_title: pageTitle ?? document.title,
   });
@@ -23,6 +25,7 @@ export function trackPageView(pagePath: string, pageTitle?: string) {
 export function trackPageExit(pagePath: string, durationSeconds: number) {
   if (!initialized) return;
   amplitude.track('page_exit', {
+    site: SITE_NAME,
     page_path: pagePath,
     duration_seconds: Math.round(durationSeconds),
   });
@@ -31,6 +34,7 @@ export function trackPageExit(pagePath: string, durationSeconds: number) {
 export function trackLinkClick(destination: string, sourcePage: string) {
   if (!initialized) return;
   amplitude.track('link_click', {
+    site: SITE_NAME,
     destination,
     source_page: sourcePage,
   });
