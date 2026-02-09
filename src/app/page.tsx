@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { remark } from 'remark';
+import html from 'remark-html';
 import Navbar from '@/components/Navbar';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
@@ -18,17 +20,20 @@ const PROJECTS = [
     desc: 'Resume writing agent that discovers your hidden strengths',
     url: 'https://talent-promo.hippogriff.io',
     hasAnimation: false,
+    image: '/talent-promo.png',
+    cta: 'Try',
   },
 ];
 
-function getAboutParagraphs(): string[] {
+async function getAboutHtml(): Promise<string> {
   const filePath = path.join(process.cwd(), 'content/about.md');
   const raw = fs.readFileSync(filePath, 'utf8').trim();
-  return raw.split(/\n\s*\n/).filter(Boolean);
+  const processed = await remark().use(html).process(raw);
+  return processed.toString();
 }
 
-export default function Home() {
-  const aboutParagraphs = getAboutParagraphs();
+export default async function Home() {
+  const aboutHtml = await getAboutHtml();
 
   return (
     <main>
@@ -48,11 +53,10 @@ export default function Home() {
 
       <section className="about" id="about">
         <div className="about-label">about</div>
-        <div className="about-text">
-          {aboutParagraphs.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
+        <div
+          className="about-text"
+          dangerouslySetInnerHTML={{ __html: aboutHtml }}
+        />
       </section>
 
       <Footer />

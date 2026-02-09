@@ -9,6 +9,8 @@ I always feel defeated when revising my resume. The mixed feeling of "I have so 
 
 About a year ago, two other friends and I tried to build a resume agent in a Google Agent SDK hackathon. We abandoned it halfway because of scheduling and other challenges. I really wanted to materialize the vision, therefore started to tinker on it in spare time off and on. Yeah, it took a while, multiple redesigns from agent harness all the way to UX. And today, it is finally in a not-so-unusable state.
 
+[Try here](https://talent-promo.hippogriff.io) : 30 complimentary runs per day globally
+
 ## Things I learned
 ### Workflow or agentic
 I chose the workflow design because an orchestrated stage made most sense to me as a user:
