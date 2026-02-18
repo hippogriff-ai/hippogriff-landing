@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackButton from '@/components/BackButton';
+import BlogContent from '@/components/BlogContent';
 import { getPostBySlug, getAllSlugs } from '@/lib/blog';
 
 export function generateStaticParams() {
@@ -43,10 +44,7 @@ export default async function BlogPost({
         <BackButton />
         <h1 className="blog-post-title">{post.title}</h1>
         <div className="blog-post-date">{post.date}</div>
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        <BlogContent html={post.content} />
       </article>
       <Footer />
     </main>

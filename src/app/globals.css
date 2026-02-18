@@ -483,6 +483,11 @@ main {
   margin-bottom: 32px;
 }
 
+/* ── Smooth Scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── Article Typography ── */
 .blog-post-content {
   line-height: 1.75;
@@ -564,6 +569,63 @@ main {
   border: none;
   border-top: 1px solid rgba(200, 192, 176, 0.1);
   margin: 32px 0;
+}
+
+/* ── Heading Anchors ── */
+.blog-post-content h2,
+.blog-post-content h3 {
+  position: relative;
+}
+
+.heading-anchor {
+  opacity: 0;
+  margin-left: 8px;
+  color: var(--accent-dim);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.blog-post-content h2:hover .heading-anchor,
+.blog-post-content h3:hover .heading-anchor {
+  opacity: 1;
+}
+
+.heading-anchor:hover {
+  color: var(--accent);
+}
+
+/* ── Blog Media ── */
+.blog-post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.blog-post-content figcaption {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  margin: 16px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* ── Responsive ── */
