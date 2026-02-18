@@ -21,16 +21,18 @@ Build hippogriff.io landing page — personal maker brand portfolio with flat ca
 
 ## State:
   - Done:
-    - Phases 1-8: Full site build (scaffold, layout, components, blog, verified)
-    - Phase 9: About section on homepage (between blog and footer)
-    - Phase 10: SEO metadata (layout OG/Twitter, blog listing metadata, blog post generateMetadata, robots.txt, llms.txt)
-    - Phase 11: Amplitude analytics (@amplitude/analytics-browser, AmplitudeProvider, page_view/page_exit/link_click events, time-on-page tracking)
+    - Phases 1-11: Full site build, about, SEO, analytics
   - Now:
-    - All phases complete. Build passes (6 static pages). Ready for user review.
+    - Phase 12: Blog shareability & media rendering — COMPLETE
+      - cleanUrls added to vercel.json
+      - Heading IDs via post-processing in blog.ts
+      - BlogContent client component with hash scroll + anchor links
+      - allowDangerousHtml + YouTube URL embed transform
+      - CSS for anchors, responsive images, 16:9 video embeds, smooth scroll
+      - Build passes (8 static pages)
   - Next:
-    - User visual review / iteration
-    - Set NEXT_PUBLIC_AMPLITUDE_API_KEY in Vercel env
     - Deploy to Vercel
+    - Test shared blog URLs live
 
 ## Open questions (UNCONFIRMED if needed):
 - Footer github link URL (currently placeholder https://github.com/hippogriff-io)

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="50 0 1600 700">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <style>
+    .heading { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 800; fill: #ffffff; text-anchor: middle; letter-spacing: 3px; }
+    .label { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 700; text-anchor: middle; font-size: 17px; letter-spacing: 1px; }
+    .sub { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 400; fill: #cccccc; text-anchor: middle; font-size: 12px; letter-spacing: 0.5px; }
+    .arrow-label { font-family: -apple-system, 'SF Pro Display', sans-serif; font-size: 13px; fill: #aaaaaa; text-anchor: middle; font-weight: 500; letter-spacing: 0.5px; }
+    .section-label { font-family: -apple-system, 'SF Pro Display', sans-serif; font-size: 12px; fill: #bbbbbb; text-anchor: middle; letter-spacing: 2px; font-weight: 600; }
+    .stat { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 300; fill: #888888; text-anchor: middle; letter-spacing: 1px; }
+  </style>
+
+  <!-- Background -->
+  <rect x="50" width="1600" height="700" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text class="heading" x="850" y="80" font-size="42" filter="url(#glow)">Architecture</text>
+  <rect x="750" y="106" width="200" height="1.5" fill="#e8a830" opacity="0.5" rx="0.75"/>
+
+  <!-- DATA FLOW label -->
+  <text class="section-label" x="850" y="158">DATA FLOW</text>
+
+  <!-- iOS App -->
+  <rect x="100" y="190" width="190" height="80" rx="10" fill="none" stroke="#e8a830" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="195" y="225" fill="#e8a830">iOS App</text>
+  <text class="sub" x="195" y="245">SwiftUI · LiDAR</text>
+
+  <!-- Arrow -->
+  <line x1="290" y1="230" x2="370" y2="230" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="370,226 380,230 370,234" fill="#e8a830" opacity="0.4"/>
+  <text class="arrow-label" x="335" y="220">HTTPS</text>
+
+  <!-- FastAPI Gateway -->
+  <rect x="380" y="190" width="230" height="80" rx="10" fill="none" stroke="#4ADE80" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="495" y="225" fill="#4ADE80">FastAPI</text>
+  <text class="sub" x="495" y="245">Gateway · Validation</text>
+
+  <!-- Arrow -->
+  <line x1="610" y1="230" x2="690" y2="230" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="690,226 700,230 690,234" fill="#e8a830" opacity="0.4"/>
+  <text class="arrow-label" x="650" y="220">signals</text>
+
+  <!-- Temporal Cloud -->
+  <rect x="700" y="180" width="300" height="100" rx="12" fill="none" stroke="#e8a830" stroke-width="2" opacity="0.8"/>
+  <text class="label" x="850" y="220" fill="#e8a830" font-size="19">Temporal</text>
+  <text class="sub" x="850" y="242">Durable Workflow Orchestration</text>
+  <text class="sub" x="850" y="260">State · Retry · Resume</text>
+
+  <!-- Arrow -->
+  <line x1="1000" y1="230" x2="1080" y2="230" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="1080,226 1090,230 1080,234" fill="#e8a830" opacity="0.4"/>
+  <text class="arrow-label" x="1040" y="220">activities</text>
+
+  <!-- Temporal Worker -->
+  <rect x="1090" y="190" width="230" height="80" rx="10" fill="none" stroke="#60A5FA" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="1205" y="225" fill="#60A5FA">Worker</text>
+  <text class="sub" x="1205" y="245">Stateless Activities</text>
+
+  <!-- STORAGE section -->
+  <line x1="495" y1="270" x2="495" y2="340" stroke="#4ADE80" stroke-width="1" opacity="0.25"/>
+  <line x1="350" y1="340" x2="640" y2="340" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+  <line x1="350" y1="340" x2="350" y2="370" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+  <line x1="640" y1="340" x2="640" y2="370" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+
+  <text class="section-label" x="495" y="365">STORAGE</text>
+
+  <!-- PostgreSQL -->
+  <rect x="230" y="380" width="240" height="80" rx="10" fill="none" stroke="#A78BFA" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="350" y="410" fill="#A78BFA">PostgreSQL</text>
+  <text class="sub" x="350" y="428">All structured data + metadata</text>
+  <text class="sub" x="350" y="444">Briefs · Products · Revisions</text>
+
+  <!-- Cloudflare R2 -->
+  <rect x="520" y="380" width="240" height="80" rx="10" fill="none" stroke="#F472B6" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="640" y="410" fill="#F472B6">Cloudflare R2</text>
+  <text class="sub" x="640" y="428">Binary blobs only</text>
+  <text class="sub" x="640" y="444">Photos · Designs · LiDAR scans</text>
+
+  <!-- AI SERVICES section -->
+  <line x1="1205" y1="270" x2="1205" y2="340" stroke="#60A5FA" stroke-width="1" opacity="0.25"/>
+  <line x1="960" y1="340" x2="1580" y2="340" stroke="#ffffff" stroke-width="1" opacity="0.1"/>
+  <line x1="1060" y1="340" x2="1060" y2="370" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+  <line x1="1310" y1="340" x2="1310" y2="370" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+  <line x1="1530" y1="340" x2="1530" y2="370" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+
+  <text class="section-label" x="1300" y="365">AI SERVICES</text>
+
+  <!-- Claude Opus 4.6 -->
+  <rect x="920" y="380" width="280" height="90" rx="10" fill="none" stroke="#e8a830" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="1060" y="412" fill="#e8a830">Claude Opus 4.6</text>
+  <text class="sub" x="1060" y="432">Intake · Room analysis</text>
+  <text class="sub" x="1060" y="448">Shopping · Eval judge</text>
+  <text class="sub" x="1060" y="464">+ Haiku · Sonnet</text>
+
+  <!-- Gemini 3 Pro -->
+  <rect x="1220" y="380" width="180" height="90" rx="10" fill="none" stroke="#34D399" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="1310" y="412" fill="#34D399">Gemini 3 Pro</text>
+  <text class="sub" x="1310" y="432">Image generation</text>
+  <text class="sub" x="1310" y="448">Multi-turn editing</text>
+
+  <!-- Exa -->
+  <rect x="1420" y="380" width="220" height="90" rx="10" fill="none" stroke="#F59E0B" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="1530" y="412" fill="#F59E0B">Exa Search</text>
+  <text class="sub" x="1530" y="432">Product search</text>
+  <text class="sub" x="1530" y="448">AI-scored matching</text>
+
+  <!-- Tagline -->
+  <text class="stat" x="850" y="560" font-size="16">
+    iOS → FastAPI → Temporal → Worker → AI.  Every step durable, every failure recoverable.
+  </text>
+</svg>

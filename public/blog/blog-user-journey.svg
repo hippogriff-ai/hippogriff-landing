@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="50 0 1600 420">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <style>
+    .heading { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 800; fill: #ffffff; text-anchor: middle; letter-spacing: 3px; }
+    .label { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 700; text-anchor: middle; font-size: 15px; letter-spacing: 1px; }
+    .sub { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 400; fill: #cccccc; text-anchor: middle; font-size: 12px; letter-spacing: 0.3px; }
+    .arrow-label { font-family: -apple-system, 'SF Pro Display', sans-serif; font-size: 14px; fill: #cccccc; text-anchor: middle; font-weight: 500; letter-spacing: 0.5px; }
+    .step-num { font-family: -apple-system, 'SF Pro Display', sans-serif; font-size: 11px; fill: #bbbbbb; text-anchor: middle; letter-spacing: 1px; font-weight: 600; }
+    .stat { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif; font-weight: 300; fill: #888888; text-anchor: middle; letter-spacing: 1px; }
+  </style>
+
+  <!-- Background -->
+  <rect x="50" width="1600" height="420" fill="url(#bg)"/>
+
+  <!-- Title -->
+  <text class="heading" x="850" y="55" font-size="36" filter="url(#glow)">User Journey</text>
+  <rect x="750" y="75" width="200" height="1.5" fill="#e8a830" opacity="0.5" rx="0.75"/>
+
+  <!-- Row 1: Upload → LiDAR Scan → Chat → Generate -->
+
+  <!-- 1. Upload Photos -->
+  <text class="step-num" x="155" y="120">01</text>
+  <rect x="80" y="130" width="150" height="70" rx="10" fill="none" stroke="#e8a830" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="155" y="162" fill="#e8a830">Upload</text>
+  <text class="sub" x="155" y="178">Room photos</text>
+
+  <!-- Arrow -->
+  <line x1="230" y1="165" x2="300" y2="165" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="300,161 310,165 300,169" fill="#e8a830" opacity="0.4"/>
+
+  <!-- 2. LiDAR Scan -->
+  <text class="step-num" x="385" y="120">02</text>
+  <rect x="310" y="130" width="150" height="70" rx="10" fill="none" stroke="#4ADE80" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="385" y="162" fill="#4ADE80">LiDAR Scan</text>
+  <text class="sub" x="385" y="178">3D room capture</text>
+
+  <!-- Arrow -->
+  <line x1="460" y1="165" x2="530" y2="165" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="530,161 540,165 530,169" fill="#e8a830" opacity="0.4"/>
+
+  <!-- 3. Chat -->
+  <text class="step-num" x="615" y="120">03</text>
+  <rect x="540" y="130" width="150" height="70" rx="10" fill="none" stroke="#60A5FA" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="615" y="162" fill="#60A5FA">Chat</text>
+  <text class="sub" x="615" y="178">Design consultation</text>
+
+  <!-- Arrow -->
+  <line x1="690" y1="165" x2="760" y2="165" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="760,161 770,165 760,169" fill="#e8a830" opacity="0.4"/>
+
+  <!-- 4. Generate -->
+  <text class="step-num" x="845" y="120">04</text>
+  <rect x="770" y="130" width="150" height="70" rx="10" fill="none" stroke="#34D399" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="845" y="162" fill="#34D399">Generate</text>
+  <text class="sub" x="845" y="178">Photorealistic designs</text>
+
+  <!-- Arrow down + right turn -->
+  <line x1="845" y1="200" x2="845" y2="240" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="841,240 845,250 849,240" fill="#e8a830" opacity="0.4"/>
+
+  <!-- Row 2: Select → Annotate → Approve → Shopping List -->
+
+  <!-- 5. Select -->
+  <text class="step-num" x="845" y="262">05</text>
+  <rect x="770" y="270" width="150" height="70" rx="10" fill="none" stroke="#A78BFA" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="845" y="302" fill="#A78BFA">Select</text>
+  <text class="sub" x="845" y="318">Pick favorite</text>
+
+  <!-- Arrow -->
+  <line x1="920" y1="305" x2="990" y2="305" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="990,301 1000,305 990,309" fill="#e8a830" opacity="0.4"/>
+
+  <!-- 6. Annotate -->
+  <text class="step-num" x="1075" y="262">06</text>
+  <rect x="1000" y="270" width="150" height="70" rx="10" fill="none" stroke="#F472B6" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="1075" y="302" fill="#F472B6">Annotate</text>
+  <text class="sub" x="1075" y="318">Circle + describe</text>
+
+  <!-- Loop arrow back to Generate -->
+  <path d="M1075,340 L1075,365 L845,365 L845,340" fill="none" stroke="#F472B6" stroke-width="1" opacity="0.3" stroke-dasharray="4,3"/>
+  <polygon points="841,340 845,350 849,340" fill="#F472B6" opacity="0.3"/>
+  <text class="sub" x="960" y="380" fill="#F472B6">iterate</text>
+
+  <!-- Arrow -->
+  <line x1="1150" y1="305" x2="1220" y2="305" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="1220,301 1230,305 1220,309" fill="#e8a830" opacity="0.4"/>
+
+  <!-- 7. Approve -->
+  <text class="step-num" x="1305" y="262">07</text>
+  <rect x="1230" y="270" width="150" height="70" rx="10" fill="none" stroke="#F59E0B" stroke-width="1.5" opacity="0.6"/>
+  <text class="label" x="1305" y="302" fill="#F59E0B">Approve</text>
+  <text class="sub" x="1305" y="318">Final design</text>
+
+  <!-- Arrow -->
+  <line x1="1380" y1="305" x2="1450" y2="305" stroke="#e8a830" stroke-width="1.5" opacity="0.3"/>
+  <polygon points="1450,301 1460,305 1450,309" fill="#e8a830" opacity="0.4"/>
+
+  <!-- 8. Shopping List -->
+  <text class="step-num" x="1535" y="262">08</text>
+  <rect x="1460" y="270" width="150" height="70" rx="10" fill="none" stroke="#e8a830" stroke-width="2" opacity="0.8"/>
+  <text class="label" x="1535" y="302" fill="#e8a830">Shop</text>
+  <text class="sub" x="1535" y="318">Real products</text>
+
+</svg>
