@@ -595,6 +595,31 @@ html {
   color: var(--accent);
 }
 
+/* ── Blog Tables ── */
+.blog-post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9em;
+}
+
+.blog-post-content th,
+.blog-post-content td {
+  padding: 10px 14px;
+  text-align: left;
+  border: 1px solid rgba(232, 168, 48, 0.15);
+}
+
+.blog-post-content th {
+  background: rgba(232, 168, 48, 0.1);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.blog-post-content tr:nth-child(even) {
+  background: rgba(232, 168, 48, 0.04);
+}
+
 /* ── Blog Media ── */
 .blog-post-content img {
   max-width: 100%;

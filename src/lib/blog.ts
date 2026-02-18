@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
+import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'content/blog');
@@ -63,9 +64,10 @@ function addHeadingIds(htmlContent: string): string {
 
 function embedYouTubeUrls(htmlContent: string): string {
   // Match standalone YouTube URLs in their own <p> tag
+  // Handles both raw URLs and auto-linked URLs (from remark-gfm)
   return htmlContent.replace(
-    /<p>\s*(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)(?:[^\s<]*))\s*<\/p>/g,
-    (_match, _url, videoId) => {
+    /<p>\s*(?:<a href="[^"]*">)?\s*https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)[^\s<]*(?:<\/a>)?\s*<\/p>/g,
+    (_match, videoId) => {
       return `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
     }
   );
@@ -77,6 +79,7 @@ export async function getPostBySlug(slug: string): Promise<Post & { content: str
   const { data, content } = matter(fileContents);
 
   const processed = await remark()
+    .use(remarkGfm)
     .use(html, { allowDangerousHtml: true })
     .process(content);
 

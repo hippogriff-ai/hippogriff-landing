@@ -10,6 +10,14 @@ import Footer from '@/components/Footer';
 
 const PROJECTS = [
   {
+    name: 'Remo',
+    desc: 'LiDAR-powered room redesign agent with shopping list support',
+    url: 'https://github.com/hippogriff-ai/remo',
+    hasAnimation: false,
+    image: '/remo.png',
+    cta: 'View',
+  },
+  {
     name: 'TypeCraft',
     desc: 'A Space Invaders typing game that makes you faster',
     url: 'https://typecraft.hippogriff.io',
