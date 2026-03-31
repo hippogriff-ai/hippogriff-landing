@@ -32,6 +32,29 @@ export default function BlogContent({ html }: { html: string }) {
       });
       heading.appendChild(anchor);
     });
+
+    // Click-to-zoom on images
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      img.style.cursor = 'zoom-in';
+      img.style.transition = 'transform 0.2s ease';
+      img.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.02)'; });
+      img.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; });
+      img.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:2rem;';
+        const zoomed = document.createElement('img');
+        zoomed.src = img.src;
+        zoomed.alt = img.alt;
+        zoomed.style.cssText = 'max-width:95vw;max-height:95vh;object-fit:contain;border-radius:4px;';
+        overlay.appendChild(zoomed);
+        overlay.addEventListener('click', () => overlay.remove());
+        document.addEventListener('keydown', function handler(e) {
+          if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', handler); }
+        });
+        document.body.appendChild(overlay);
+      });
+    });
   }, [html]);
 
   return (
