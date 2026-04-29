@@ -5,13 +5,13 @@ excerpt: "Anthropic's Memory API elevates file-based memory into a distributed p
 pinned: true
 ---
 
-Anthropic's Memory API elevates file-based memory into a distributed primitive: per-file linearizability via compare-and-swap. Local filesystem to the agent — distributed semantics underneath. 
+Anthropic's [Memory API](https://claude.com/blog/claude-managed-agents-memory) elevates file-based memory into a distributed primitive: per-file linearizability via compare-and-swap (CAS). Local filesystem to the agent — distributed semantics underneath. 
 
 This post is my best guess at the design. Public docs cover the surface — mounts, access modes, optimistic concurrency. The internals are inferred. The framing is the point; specific implementation claims may be wrong.
 
 ## Why files
 
-Files are the right primitive because models got better at managing them. From [Anthropic's own framing](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills): *"Claude Code can accomplish complex tasks across domains using local code execution and filesystems."* [Lance Martin made the case more directly](https://x.com/RLanceMartin/status/2047720067107033525) — files are shareable and interpretable in ways embeddings are not.
+Files are the right primitive because models have got better at managing them. From [Anthropic's own framing](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills): *"Claude Code can accomplish complex tasks across domains using local code execution and filesystems."* [Lance Martin also added that](https://x.com/RLanceMartin/status/2047720067107033525) — files are shareable and interpretable in ways embeddings are not.
 
 There's also the challenge to get RAG right: selecting an embedding model, tuning chunk sizes, versioning the index. As model capability grows, file-based memory is the high-ROI choice. The agent does the curation, after all, why waste the model's ability?
 
@@ -33,7 +33,7 @@ Every change generates a new version of the store. The audit trail is built in �
 
 ![data_model](/blog/data_model_memory.png)
 
-**Write consistency.** The docs phrase it as *"safe content edits (optimistic concurrency)"* — that's compare-and-swap. Same pattern [S3 ships for multi-writer apps](https://aws.amazon.com/blogs/storage/building-multi-writer-applications-on-amazon-s3-using-native-controls/): each write carries the expected version; if the version moved, the write fails and the agent retries. This effectively prevents lost writes. 
+**Write consistency.** The docs phrase it as *"safe content edits (optimistic concurrency)"*. That reminds me of CAS. Same pattern [S3 ships for multi-writer apps](https://aws.amazon.com/blogs/storage/building-multi-writer-applications-on-amazon-s3-using-native-controls/): each write carries the expected version; if the version moved, the write fails and the agent retries. This effectively prevents lost writes. 
 
 ![memory_architecture](/blog/architecture_memory.png)
 
@@ -41,7 +41,7 @@ Every change generates a new version of the store. The audit trail is built in �
 
 In my opinion that's fine. A memory entry going stale for a couple minutes should not materially change answer quality. Linearizability matters at write time. Reads can be looser.
 
-**Version log.** Written once, read rarely — append-only fits. Blobs live in S3, with log entries carrying `version_id`, `parent_version_id`, `blob_hash`, `operation`. Because S3 keys by content hash, supporting `memory_versions.list` would be inefficient if relying on S3 alone. So it makes sense to introduce a Dynamo DB to store secondary index, which is derived from the S3  blobs, so that looksup by `store_id` or `memory_id` are fast.
+**Version log.** Written once, read rarely — append-only fits. Blobs live in S3, with log entries carrying `version_id`, `parent_version_id`, `blob_hash`, `operation`. S3 keys by content hash, supporting `memory_versions.list` would be inefficient if relying on S3 alone. So it makes sense to introduce a Dynamo DB to store secondary index, which is derived from the S3 blobs, makes looksup by `store_id` or `memory_id` fast.
 
 Specifically, for DynamoDB, a partition key on `store_id` matches the access pattern — list memories by store, fast.
 
