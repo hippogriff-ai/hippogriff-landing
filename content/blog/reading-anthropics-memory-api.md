@@ -5,7 +5,7 @@ excerpt: "Anthropic's Memory API elevates file-based memory into a distributed p
 pinned: true
 ---
 
-Anthropic's [Memory API](https://claude.com/blog/claude-managed-agents-memory) elevates file-based memory into a distributed primitive: per-file linearizability via compare-and-swap (CAS). Local filesystem to the agent — distributed semantics underneath. 
+Anthropic's [Memory API](https://claude.com/blog/claude-managed-agents-memory) elevates file-based memory into a distributed primitive: per-file linearizability via compare-and-swap (CAS). The agent sees a filesystem. The system handles consistency.
 
 This post is my best guess at the design. Public docs cover the surface — mounts, access modes, optimistic concurrency. The internals are inferred. The framing is the point; specific implementation claims may be wrong.
 
