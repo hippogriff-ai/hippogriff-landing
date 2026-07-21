@@ -6,9 +6,16 @@ Vicki Zhang is a senior full stack software engineer building agents at work and
 ## Projects
 - TypeCraft: A Space Invaders typing game that showcases how a small, well-crafted app can make a routine task more fun. https://typecraft.hippogriff.io
 - Talent Promo: Resume writing agent that discovers your hidden strengths. https://talent-promo.hippogriff.io
+- Remo: LiDAR-powered iOS room redesign agent — photograph a room, chat with an AI design consultant, get photorealistic redesigns and a shoppable product list. https://github.com/hippogriff-ai/remo
 
 ## Blog
-Posts on software engineering, AI, agents, and building things.
+Posts on software engineering, AI, agents, and building things. Feed: https://www.hippogriff.io/feed.xml
+
+- Reading Anthropic's Memory API: Best-guess design analysis of the Memory API — per-file linearizability via compare-and-swap, file-based memory as a distributed primitive. https://www.hippogriff.io/blog/reading-anthropics-memory-api
+- How Agents Communicate Inside A Team: How Claude Code agent teams route messages — the communication boundary is prompt instruction, rebuilt from scratch in ~320 lines of Python with the Claude Agent SDK. https://www.hippogriff.io/blog/how-agents-communicate-inside-a-team
+- Remo: From Moldy Bathroom to Shoppable Redesign, All AI-Orchestrated: Building an iOS LiDAR room-redesign agent at the Claude Code x Cerebral Valley hackathon. https://www.hippogriff.io/blog/remo-lidar-room-redesign-agent
+- What I learned from building a resume agent: Agent design lessons from building Talent Promo. https://www.hippogriff.io/blog/what-i-learned-from-resume-agent
+- Why I built TypeCraft: Daily grind becomes daily play. https://www.hippogriff.io/blog/why-i-built-typecraft
 
 ## Contact
 GitHub: https://github.com/hippogriff-ai
