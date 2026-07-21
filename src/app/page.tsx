@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import type { Metadata } from 'next';
 import { remark } from 'remark';
 import html from 'remark-html';
 import Navbar from '@/components/Navbar';
@@ -7,6 +8,14 @@ import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
 import BlogPreview from '@/components/BlogPreview';
 import Footer from '@/components/Footer';
+import { SITE_URL, SITE_NAME, AUTHOR, FEED_ALTERNATE } from '@/lib/site';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+    types: FEED_ALTERNATE,
+  },
+};
 
 const PROJECTS = [
   {
@@ -43,8 +52,30 @@ async function getAboutHtml(): Promise<string> {
 export default async function Home() {
   const aboutHtml = await getAboutHtml();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      {
+        '@type': 'Person',
+        name: AUTHOR,
+        url: SITE_URL,
+        jobTitle: 'Senior Full Stack Software Engineer',
+        sameAs: ['https://github.com/hippogriff-ai'],
+      },
+    ],
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <Header />
 
