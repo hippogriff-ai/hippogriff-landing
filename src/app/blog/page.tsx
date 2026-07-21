@@ -7,14 +7,14 @@ import { SITE_NAME, FEED_ALTERNATE } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Posts on design, engineering, and building things — by Vicki Zhang.',
+  description: 'Posts on AI agents, software engineering, and building things, by Vicki Zhang.',
   alternates: {
     canonical: '/blog',
     types: FEED_ALTERNATE,
   },
   openGraph: {
     title: 'Blog',
-    description: 'Posts on design, engineering, and building things — by Vicki Zhang.',
+    description: 'Posts on AI agents, software engineering, and building things, by Vicki Zhang.',
     url: '/blog',
     siteName: SITE_NAME,
     type: 'website',
