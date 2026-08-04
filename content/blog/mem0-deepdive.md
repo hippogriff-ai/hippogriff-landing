@@ -43,7 +43,7 @@ Mem0 is a memory layer for agentic apps, leveraging LLM to extract facts from tr
     - fastembed (Qdrant only)
         - produce sparse vector for BM25
     - other vector stores
-        - Mem0 provides generic interfaces that can integrate with 20+ providers, including pgvector, chroma, qdrant (default), however the capabilities are different, depends on the actual provider.
+        - Mem0 provides generic interfaces that can integrate with 20+ providers, including pgvector, chroma, qdrant (default), however the capabilities are different, depends on the actual provider
 
 ## Ingestion walk through
 
@@ -81,7 +81,7 @@ There are 8 steps involved in ingestion:
     - for an expired fact, though it is not visible upon retrieval, the existence will prevent the same fact to be re-added
     - some side notes, expiration is user provided at ingestion time, and the field gets used at read time to filter out records. Transition itself is not a thing
 - delete does not erase
-    - asymmetry in records, `delete()` drops the vector row but appends another record in SQLite history as tombstone, marked as `is_deleted=1`, however history reads have no `is_deleted` filter, causing confusion.
+    - asymmetry in records, `delete()` drops the vector row but appends another record in SQLite history as tombstone, marked as `is_deleted=1`, however history reads have no `is_deleted` filter, causing confusion
     - only `reset()` will actually erase things: it takes no scope argument, and wipes and drops everything except for entity collection, which creates `linked_memory_ids` corresponds to ghosts
 
 ## Retrieval walk through
@@ -172,10 +172,10 @@ There are 8 steps involved in ingestion:
     - no object level access control
     - scope concept is built on `run_id`, `user_id`, `agent_id`. They are filtered fields, not access control, and history table does not even carry a `user_id`
 - Error monitoring
-    - there are failures got silently dropped, such as unconfigured spaCy, which silently loses entity boosting. Vertex -> BM25 no-op (Vertex actually just returns None). pgvector -> planner cliff at scale.
+    - there are failures got silently dropped, such as unconfigured spaCy, which silently loses entity boosting. Vertex -> BM25 no-op (Vertex actually just returns None). pgvector -> planner cliff at scale
     - A failed vector insert does not end up in failure, however the fact is still written into history and still gets reported back to the caller as a successful ADD
 - Staleness
-    - no recency or time decay in OSS, so a stale fact may outrank a fresh memory.
+    - no recency or time decay in OSS, so a stale fact may outrank a fresh memory
 
 ## Summary
 
