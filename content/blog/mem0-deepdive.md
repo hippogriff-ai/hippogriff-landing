@@ -88,7 +88,26 @@ There are 8 steps involved in ingestion:
 
 ![Retrieval walk through workflow](/blog/03-retrieval-v3.png)
 
-1. client side initiates the request [sample request]
+1. client side initiates the request
+
+    Real call against mem0ai 2.0.15, OSS, embedded Qdrant, text-embedding-3-small.
+
+    ```python
+    from mem0 import Memory
+
+    m = Memory()   # embedded Qdrant at /tmp/qdrant, SQLite at ~/.mem0/history.db
+
+    results = m.search(
+        "What should I order at Nobu on Saturday?",
+        filters={"user_id": "vicki", "run_id": "dinner"},  # v3: ids live INSIDE filters
+        top_k=5,          # step 3 still fetches max(60, 4 x top_k) = 60
+        threshold=0.1,    # step 5.2 — gates the raw semantic score, before any boost
+        explain=True,     # adds score_details, which is what makes steps 4-5 visible
+    )
+    ```
+
+    Two things in there: in v3 the identity fields moved inside `filters` (a top-level `user_id=` now raises), and `top_k=5` is not the fetch size: the store is asked for 60.
+
 2. process request
     1. raw query gets embedded
     2. spaCy lemmatizes it + extracts entities
@@ -103,7 +122,39 @@ There are 8 steps involved in ingestion:
 7. optional reranker (does not change members of candidate list, just change the ranking)
 8. for platform version, there is temporal concept (subordinate to semantic), where the temporal intent will first gets classified (without LLM call), and then pass onto a step to rerank the retrieved facts with the time concept
     1. time concept has `time_precision` (day/ week/ month/ year/approximate), with lower precision contributes less into the score while higher precision contributes more
-9. return result [sample response goes here]
+9. return result
+
+    ```json
+    {
+      "results": [
+        {
+          "id": "cef9e18d-...",
+          "memory": "Assistant recommended Nobu's black cod miso as the signature dish to order.",
+          "score": 0.7362,
+          "user_id": "vicki",
+          "run_id": "dinner",
+          "attributed_to": "assistant",
+          "created_at": "2026-08-03T03:41:12.884Z",
+          "score_details": {                  // only present because explain=True
+            "semantic_score":     0.6447,     // step 3
+            "bm25_score":         0.6977,     // step 4.1, sigmoid-normalized from raw 6.1945
+            "entity_boost":       0.4980,     // step 4.2, "Nobu" at sim 1.0, damped for 3 links
+            "raw_score":          1.8404,     // 0.6447 + 0.6977 + 0.4980
+            "max_possible_score": 2.5,        // step 5.1 — 1.0 + 1.0 (any BM25) + 0.5 (any entity)
+            "final_score":        0.7362,     // 1.8404 / 2.5
+            "threshold":          0.1
+          }
+        },
+        {
+          "id": "c78f4d4c-...",
+          "memory": "User is allergic to shellfish and must avoid oysters and shrimp.",
+          "score": 0.0960,
+          "score_details": { "semantic_score": 0.2401, "bm25_score": 0.0,
+                             "entity_boost": 0.0, "max_possible_score": 2.5 }
+        }
+      ]
+    }
+    ```
 
 ## Some observations from enterprise use case perspective
 
