@@ -16,7 +16,7 @@ Mem0 is a memory layer for agentic apps, leveraging LLM to extract facts from tr
 
 ## Components in Mem0
 
-![Mem0 components high level flow chart](/blog/01-components-v3.png)
+![Mem0 components high level flow chart](/blog/01-components-v4.png)
 
 - Core components
     - LLM (responsible to extract facts from user and assistant input as candidate for later storage)
@@ -47,7 +47,7 @@ Mem0 is a memory layer for agentic apps, leveraging LLM to extract facts from tr
 
 ## Ingestion walk through
 
-![Ingestion walk through: restaurant booking example](/blog/02-ingestion-v3.png)
+![Ingestion walk through: restaurant booking example](/blog/02-ingestion-v4.png)
 
 There are 8 steps involved in ingestion:
 
@@ -86,7 +86,7 @@ There are 8 steps involved in ingestion:
 
 ## Retrieval walk through
 
-![Retrieval walk through workflow](/blog/03-retrieval-v3.png)
+![Retrieval walk through workflow](/blog/03-retrieval-v4.png)
 
 1. client side initiates the request
 
