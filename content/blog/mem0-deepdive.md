@@ -8,7 +8,7 @@ excerpt: "Mem0 uses an LLM to extract flat, add-only memory (or facts), it uses 
 
 While I was researching the solutions available in memory space, Mem0 pops up quite a bit, which piques my interest to have a deeper look at it.
 
-Forenote: the v3 implementation is different from its original paper published in 2025
+Forenote: the v3 implementation is different from its [original paper](https://arxiv.org/abs/2504.19413) published in 2025
 
 ## What is Mem0
 
