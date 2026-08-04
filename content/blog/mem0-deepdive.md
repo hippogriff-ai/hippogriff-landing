@@ -12,7 +12,7 @@ Forenote: the v3 implementation is different from its original paper published i
 
 ## What is Mem0
 
-A product with memory as product, leveraging lexical search and semantic search to interact with memory. It is not file system based. It has OSS and managed version, with the managed version having more capability than OSS.
+A product with memory as product, leveraging lexical search and semantic search to interact with memory. It is not file system based. It has [OSS](https://github.com/mem0ai/mem0) and managed version, with the managed version having more capability than OSS.
 
 ## Components in Mem0
 
@@ -120,7 +120,7 @@ There are 8 steps involved in ingestion:
     2. threshold: default (0.1) low score does not get evaluated
 6. sort and truncate to `top_k`
 7. optional reranker (does not change members of candidate list, just change the ranking)
-8. for platform version, there is temporal concept (subordinate to semantic), where the temporal intent will first gets classified (without LLM call), and then pass onto a step to rerank the retrieved facts with the time concept
+8. for platform version, there is [temporal concept](https://mem0.ai/blog/introducing-temporal-reasoning-in-mem0) (subordinate to semantic), where the temporal intent will first gets classified (without LLM call), and then pass onto a step to rerank the retrieved facts with the time concept
     1. time concept has `time_precision` (day/ week/ month/ year/approximate), with lower precision contributes less into the score while higher precision contributes more
 9. return result
 
