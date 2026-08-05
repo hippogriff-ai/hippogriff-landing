@@ -145,9 +145,11 @@ There are 8 steps involved in ingestion:
 
     This step does not change the membership of the candidate list; it just changes the ranking.
 
-8. For the platform version, there is a [temporal concept](https://mem0.ai/blog/introducing-temporal-reasoning-in-mem0) (subordinate to semantic), where the temporal intent will first get classified (without an LLM call), and then get passed on to a step to rerank the retrieved facts with the time concept
+8. [Temporal concept](https://mem0.ai/blog/introducing-temporal-reasoning-in-mem0) (platform only)
 
-    The time concept has `time_precision` (day / week / month / year / approximate): lower precision contributes less to the score while higher precision contributes more.
+    It is subordinate to semantic: the temporal intent will first get classified (without an LLM call), and then get passed on to a step to rerank the retrieved facts with the temporal concept.
+
+    The temporal concept has `time_precision` (day / week / month / year / approximate): lower precision contributes less to the score while higher precision contributes more.
 
 9. Return result
 
