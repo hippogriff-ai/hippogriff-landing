@@ -217,4 +217,10 @@ There are 8 steps involved in ingestion:
 
 ## Summary
 
-Mem0 uses an LLM to extract flat, add-only memory (or facts), and it uses semantic search to retrieve relevant memory and boosts the ranking by using keyword matching (BM25) and entity matching. In terms of memory itself, the connection between each memory is only implicit, expressed through embedding proximity or a shared entity hub. If the embedding model predates the terms, then split facts about Rubin and Nvidia will just stay unrelated. For the enterprise use case, scalability, correctness, and auditability are three big open questions that need to be answered. I think it is hard to find an answer here with Mem0’s flat add-only memory with no explicit link between memories, and time as an afterthought. To continue the search for answers, next blogs will explore Graphiti for temporal knowledge graph and Letta Code for the lineage and memory in a file system.
+Mem0 uses an LLM to extract flat, add-only memory (or facts), and it uses semantic search to retrieve relevant memory and boosts the ranking by using keyword matching (BM25) and entity matching. 
+
+In terms of memory itself, the connection between each memory is only implicit, expressed through embedding proximity or a shared entity hub. If the embedding model predates the terms, then split facts about Rubin and Nvidia will just stay unrelated. 
+
+For the enterprise use case, scalability, correctness, and auditability are three big open questions that need to be answered. I think it is hard to find an answer here with Mem0’s flat add-only memory with no explicit link between memories, and time as an afterthought. 
+
+To continue the search for answers, next blogs will explore Graphiti for temporal knowledge graph and Letta Code for the lineage and agent-managed memory in a file system.
