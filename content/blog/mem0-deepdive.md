@@ -20,10 +20,10 @@ Mem0 is a memory layer for agentic apps, leveraging an LLM to extract facts from
 
 - Core components
     - LLM (responsible for extracting facts from user and assistant input as candidates for later storage)
-    - embedding model
+    - Embedding model
 
         It powers the novelty reference retrieval at insert time and candidate retrieval at search time.
-    - fusion logic
+    - Fusion logic
 
         It exists in the form of code, and scores the semantically retrieved candidates with BM25/ entity signals. Worth noting that the semantically retrieved pool is the starting point: a candidate with perfect keyword matching but outside of the pool does not get evaluated.
     - Storage
@@ -34,7 +34,7 @@ Mem0 is a memory layer for agentic apps, leveraging an LLM to extract facts from
 
             It saves two types of records: A. rolling raw messages, which will be used as context to extract facts, and B. history of added facts.
 - Optional components
-    - reranker
+    - Reranker
 
         It gets used AFTER the candidates are retrieved, instead of saving those candidates that got excluded in semantic search.
     - spaCy
@@ -43,9 +43,9 @@ Mem0 is a memory layer for agentic apps, leveraging an LLM to extract facts from
     - fastembed (Qdrant only)
 
         It produces sparse vectors for BM25.
-    - other vector stores
+    - Other vector stores
 
-        Mem0 provides generic interfaces that can integrate with 20+ providers, including pgvector, chroma, qdrant (default), however the capabilities are different, depending on the actual provider.
+        Mem0 provides generic interfaces that can integrate with 20+ providers, including pgvector, chroma, Qdrant (default), however the capabilities are different, depending on the actual provider.
 
 ## Ingestion walk through
 
@@ -53,17 +53,17 @@ Mem0 is a memory layer for agentic apps, leveraging an LLM to extract facts from
 
 There are 8 steps involved in ingestion:
 
-1. produce the inputs
+1. Produce the inputs
 
     Let's say an agent and I just had a conversation about an upcoming dinner plan. The conversation covers me wanting to book a table at Nobu, a dietary restriction, and the agent's recommendation based on that restriction. Then the conversation gets sent to Mem0 to generate memory. The scope is `user_id="vicki", run_id="dinner", agent_id="resto_assistant"` and each entry in the transcript gets parsed as `role + content` (e.g. `user + wants to book a table at Nobu`, `assistant + recommends black cod miso`).
 
-2. embed the parsed transcript to retrieve the top 10 relevant facts
+2. Embed the parsed transcript to retrieve the top 10 relevant facts
 
     If there are existing memories about restaurant booking, those facts surface here as the novelty reference so that the LLM does not regenerate overlapping facts later on.
 
-3. retrieve the past 10 original messages in the same session as context
+3. Retrieve the past 10 original messages in the same session as context
 
-4. send to LLM
+4. Send to LLM
 
     Send everything mentioned in previous steps (parsed transcript + last 10 original messages + up to 10 relevant facts + ~34k characters of fact-extraction instructions) to the LLM -> gets structured output back, including extracted facts `text` and `attributed_to` (i.e. assistant/user).
 
@@ -71,7 +71,7 @@ There are 8 steps involved in ingestion:
 
     One more thing: there are two 10s: the 10 original messages (as context) and the 10 relevant facts (as novelty reference). I got confused on my first read.
 
-5. extracted facts will be encoded in MD5, as a backstop to dedup with the relevant facts
+5. Extracted facts will be encoded in MD5, as a backstop to dedup with the relevant facts
 
     MD5 gets used by exact match: if there is overlap, the fact gets skipped. Afterwards, survivors get lemmatized by spaCy (for BM25 matching in the retrieval step).
 
@@ -89,11 +89,11 @@ There are 8 steps involved in ingestion:
 
 ### Failure modes
 
-- expired twin trap
+- Expired twin trap
 
     For an expired fact, though it is not visible upon retrieval, the existence will prevent the same fact from being re-added. You might wonder where the expiration comes from. It is user provided at ingestion time, and the field gets used at read time to filter out records. Transition itself is not a thing.
 
-- delete does not erase
+- Delete does not erase
 
     There is asymmetry in records: `delete()` drops the vector row but appends another record in SQLite history as a tombstone, marked as `is_deleted=1`. However, history reads have no `is_deleted` filter, causing confusion about whether the retrieved history is deleted or not.
 
@@ -103,7 +103,7 @@ There are 8 steps involved in ingestion:
 
 ![Retrieval walk through workflow](/blog/03-retrieval-v4.png)
 
-1. client side initiates the request
+1. Client side initiates the request
 
     Real call against mem0ai 2.0.15, OSS, embedded Qdrant, text-embedding-3-small.
 
@@ -123,33 +123,33 @@ There are 8 steps involved in ingestion:
 
     Two things in there: in v3 the identity fields moved inside `filters` (a top-level `user_id=` now raises), and `top_k=5` is not the fetch size: the store is asked for 60.
 
-2. process request
+2. Process request
 
     The raw query gets embedded. spaCy lemmatizes it and extracts "Nobu" as a query entity.
 
-3. semantic search generates the candidate pool
+3. Semantic search generates the candidate pool
 
     Overfetched: `max(60, 4 * top_k)`, therefore we end up with 60 here. This step decides who enters the candidate pool.
 
-4. score boosting
+4. Score boosting
 
     BM25 over `text_lemmatized`. The raw score is unbounded, so a sigmoid gets applied to normalize it into [0,1] before fusion. The sigmoid's parameters are also calibrated by query length, so that long queries don't inflate the signal. Query entities get matched against entity rows. One detail caught my attention: instead of adding boosts up, it actually merges by max, so the fact gets the stronger of two boosts if matched with two entities.
 
-5. score fusion
+5. Score fusion
 
     There is a threshold (default 0.1) that filters out facts with a low semantic score before the fusion. Survivors will have their three signals added up, then divided by the sum of the active signals’ maxima (1.0 semantic + 1.0 BM25 + 0.5 entity, so 2.5 when all three are on).
 
-6. sort and truncate to `top_k`
+6. Sort and truncate to `top_k`
 
-7. optional reranker
+7. Optional reranker
 
     This step does not change the membership of the candidate list; it just changes the ranking.
 
-8. for the platform version, there is a [temporal concept](https://mem0.ai/blog/introducing-temporal-reasoning-in-mem0) (subordinate to semantic), where the temporal intent will first get classified (without an LLM call), and then get passed on to a step to rerank the retrieved facts with the time concept
+8. For the platform version, there is a [temporal concept](https://mem0.ai/blog/introducing-temporal-reasoning-in-mem0) (subordinate to semantic), where the temporal intent will first get classified (without an LLM call), and then get passed on to a step to rerank the retrieved facts with the time concept
 
     The time concept has `time_precision` (day / week / month / year / approximate): lower precision contributes less to the score while higher precision contributes more.
 
-9. return result
+9. Return result
 
     Watch the second result: the allergy fact scores 0.096, with no BM25 hit and no entity match, yet it gets divided by the same 2.5 as the row that matched both.
 
@@ -187,7 +187,7 @@ There are 8 steps involved in ingestion:
 
 ## Some observations from enterprise use case perspective
 
-- concurrency
+- Concurrency
 
     Memory creation involves embedding, thinking, inserting. Though inserting is atomic, the memory steps as a whole are not atomic. It means that similar messages sent to different instances in the same time window will end up creating duplicates without the system noticing it.
 
