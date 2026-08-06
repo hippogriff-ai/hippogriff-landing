@@ -1,6 +1,7 @@
 ---
 title: "Agent Memory Series: Mem0 Deepdive"
 date: "2026-08-05"
+image: "/blog/02-ingestion-v4.png"
 excerpt: "Mem0 uses an LLM to extract flat, add-only memory (or facts), and it uses semantic search to retrieve relevant memory and boosts the ranking by using keyword matching (BM25) and entity matching."
 ---
 
