@@ -33,6 +33,13 @@ export async function generateMetadata({
       url: `/blog/${slug}`,
       siteName: SITE_NAME,
       authors: [AUTHOR],
+      ...(post.image ? { images: [post.image] } : {}),
+    },
+    twitter: {
+      card: post.image ? 'summary_large_image' : 'summary',
+      title: post.title,
+      description: post.excerpt,
+      ...(post.image ? { images: [post.image] } : {}),
     },
   };
 }
@@ -54,6 +61,7 @@ export default async function BlogPost({
     dateModified: post.date,
     url: `${SITE_URL}/blog/${slug}`,
     mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+    ...(post.image ? { image: `${SITE_URL}${post.image}` } : {}),
     author: {
       '@type': 'Person',
       name: AUTHOR,

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { getLatestPosts } from '@/lib/blog';
+import { getAllPosts } from '@/lib/blog';
 import BlogCard from './BlogCard';
 
 export default function BlogPreview() {
-  const posts = getLatestPosts(4);
+  const posts = getAllPosts();
 
   return (
     <section className="blog-section">

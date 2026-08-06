@@ -34,9 +34,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Hippogriff',
-    description:
-      'Agents, games, and experiments by Vicki Zhang \u2014 reimagining human & app interaction.',
   },
 };
 

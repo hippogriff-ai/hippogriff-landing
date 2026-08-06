@@ -13,7 +13,18 @@ export interface Post {
   date: string;
   excerpt: string;
   pinned?: boolean;
+  image?: string;
   content?: string;
+}
+
+// Social-card image: explicit frontmatter `image` wins, else first raster image in the
+// post body. SVG is excluded — X and other card processors don't support it.
+function resolvePostImage(data: { image?: string }, content: string): string | undefined {
+  if (data.image) return data.image;
+  for (const match of content.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) {
+    if (/\.(png|jpe?g|gif|webp)$/i.test(match[1])) return match[1];
+  }
+  return undefined;
 }
 
 export function getAllPosts(): Post[] {
@@ -24,7 +35,7 @@ export function getAllPosts(): Post[] {
       const slug = filename.replace(/\.md$/, '');
       const fullPath = path.join(postsDirectory, filename);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data } = matter(fileContents);
+      const { data, content } = matter(fileContents);
 
       return {
         slug,
@@ -32,6 +43,7 @@ export function getAllPosts(): Post[] {
         date: data.date,
         excerpt: data.excerpt,
         pinned: data.pinned || false,
+        image: resolvePostImage(data, content),
       };
     });
 
@@ -93,6 +105,7 @@ export async function getPostBySlug(slug: string): Promise<Post & { content: str
     date: data.date,
     excerpt: data.excerpt,
     pinned: data.pinned || false,
+    image: resolvePostImage(data, content),
     content: htmlContent,
   };
 }
