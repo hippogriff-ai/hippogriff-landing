@@ -17,11 +17,14 @@ export interface Post {
   content?: string;
 }
 
-// Social-card image: explicit frontmatter `image` wins, else first image in the post body.
+// Social-card image: explicit frontmatter `image` wins, else first raster image in the
+// post body. SVG is excluded — X and other card processors don't support it.
 function resolvePostImage(data: { image?: string }, content: string): string | undefined {
   if (data.image) return data.image;
-  const match = content.match(/!\[[^\]]*\]\(([^)\s]+)/);
-  return match ? match[1] : undefined;
+  for (const match of content.matchAll(/!\[[^\]]*\]\(([^)\s]+)/g)) {
+    if (/\.(png|jpe?g|gif|webp)$/i.test(match[1])) return match[1];
+  }
+  return undefined;
 }
 
 export function getAllPosts(): Post[] {
