@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="plate1" viewBox="0 0 1200 675" role="img" aria-label="Plate I: the seven building blocks of Graphiti — episode, entity, fact edge, temporal stamps, mentions, community, saga">
+  <rect x="0" y="0" width="1200" height="675" fill="#F4F1EA"/>
+    <defs>
+      <marker id="mk1-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2721"/></marker>
+      <marker id="mk1-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A9812F"/></marker>
+      <marker id="mk1-grey" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#918B7F"/></marker>
+    </defs>
+    <style>
+      .card { fill: #EFEAE0; stroke: #DFD8C8; stroke-width: 1.6; }
+      .t-name { font-size: 22px; fill: #2B2721; }
+      .t-cap { font-size: 14px; font-style: italic; fill: #6B655A; }
+      .t-lab { font-size: 13px; fill: #6B655A; font-style: italic; }
+      .t-pill { font-size: 13px; letter-spacing: 2px; fill: #2B2721; }
+      .t-date-g { font-size: 14px; fill: #A9812F; }
+      .t-date-x { font-size: 14px; fill: #918B7F; }
+      .ring { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.8; }
+      .glyph { stroke: #2B2721; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .sheet { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.8; stroke-linejoin: round; }
+      .sheetline { stroke: #B7B1A4; stroke-width: 2.6; stroke-linecap: round; }
+      .pill { fill: #F2E7CE; stroke: #2B2721; stroke-width: 2.6; }
+      .xmark { stroke: #C0913B; stroke-width: 4.4; stroke-linecap: round; }
+    </style>
+
+    <!-- Row 1: Episode · Entity · Fact · Stamps -->
+    <!-- Card 1: Episode -->
+    <g transform="translate(0,15)">
+      <rect class="card" x="0" y="0" width="282" height="290" rx="8"/>
+      <path class="sheet" d="M96 44 h64 l30 30 v96 h-94 z"/>
+      <path class="glyph" d="M160 44 v30 h30"/>
+      <line class="sheetline" x1="112" y1="102" x2="204" y2="102"/>
+      <line class="sheetline" x1="112" y1="120" x2="204" y2="120"/>
+      <line class="sheetline" x1="112" y1="138" x2="184" y2="138"/>
+      <text class="t-name" x="141" y="228" text-anchor="middle">Episode</text>
+      <text class="t-cap" x="141" y="254" text-anchor="middle">what was said, kept verbatim</text>
+    </g>
+    <!-- Card 2: Entity -->
+    <g transform="translate(306,15)">
+      <rect class="card" x="0" y="0" width="282" height="290" rx="8"/>
+      <circle class="ring" cx="100" cy="104" r="40"/>
+      <circle class="glyph" cx="100" cy="92" r="11"/>
+      <path class="glyph" d="M78 128 a24 22 0 0 1 44 0"/>
+      <circle class="ring" cx="196" cy="104" r="40"/>
+      <path class="glyph" d="M196 78 q8 -8 14 -4"/>
+      <circle class="glyph" cx="188" cy="94" r="7"/><circle class="glyph" cx="204" cy="94" r="7"/>
+      <circle class="glyph" cx="188" cy="110" r="7"/><circle class="glyph" cx="204" cy="110" r="7"/>
+      <circle class="glyph" cx="196" cy="124" r="7"/>
+      <text class="t-lab" x="100" y="166" text-anchor="middle">person</text>
+      <text class="t-lab" x="196" y="166" text-anchor="middle">grape</text>
+      <text class="t-name" x="141" y="228" text-anchor="middle">Entity</text>
+      <text class="t-cap" x="141" y="254" text-anchor="middle">a thing the graph can point at</text>
+    </g>
+    <!-- Card 3: Fact -->
+    <g transform="translate(612,15)">
+      <rect class="card" x="0" y="0" width="282" height="290" rx="8"/>
+      <circle class="ring" cx="46" cy="104" r="30"/>
+      <circle class="glyph" cx="46" cy="95" r="9"/>
+      <path class="glyph" d="M28 122 a20 18 0 0 1 36 0"/>
+      <circle class="ring" cx="226" cy="104" r="30"/>
+      <path class="glyph" d="M210 112 v-12 l16 -12 l16 12 v12 z M222 112 v-9 h8 v9"/>
+      <line x1="76" y1="104" x2="88" y2="104" stroke="#2B2721" stroke-width="3"/>
+      <rect class="pill" x="88" y="88" width="94" height="32" rx="16"/>
+      <text class="t-pill" x="135" y="109" text-anchor="middle">WORKS_AT</text>
+      <line x1="182" y1="104" x2="193" y2="104" stroke="#2B2721" stroke-width="3" marker-end="url(#mk1-ink)"/>
+      <text class="t-date-g" x="135" y="146" text-anchor="middle">valid 2015</text>
+      <text class="t-name" x="141" y="228" text-anchor="middle">Fact</text>
+      <text class="t-cap" x="141" y="254" text-anchor="middle">one dated sentence joining two entities</text>
+    </g>
+    <!-- Card 4: Stamps (two clocks) -->
+    <g transform="translate(918,15)">
+      <rect class="card" x="0" y="0" width="282" height="290" rx="8"/>
+      <text class="t-date-g" x="36" y="62">valid 2023 → open</text>
+      <line x1="36" y1="76" x2="234" y2="76" stroke="#A9812F" stroke-width="3.4" marker-end="url(#mk1-gold)"/>
+      <text class="t-date-x" x="36" y="112">valid 2015</text>
+      <line x1="36" y1="126" x2="146" y2="126" stroke="#918B7F" stroke-width="3.4"/>
+      <line class="xmark" x1="138" y1="118" x2="154" y2="134"/>
+      <line class="xmark" x1="154" y1="118" x2="138" y2="134"/>
+      <line x1="154" y1="126" x2="234" y2="126" stroke="#918B7F" stroke-width="3" stroke-dasharray="3 7"/>
+      <text class="t-date-x" x="234" y="150" text-anchor="end">closed 2023</text>
+      <text class="t-lab" x="36" y="184">second clock, always kept:</text>
+      <text class="t-date-x" x="36" y="203">learned 2026 · still believed</text>
+      <text class="t-name" x="141" y="228" text-anchor="middle">Stamps</text>
+      <text class="t-cap" x="141" y="254" text-anchor="middle">was it true · did we believe it</text>
+    </g>
+
+    <!-- Row 2: Mentions · Community · Saga -->
+    <!-- Card 5: Mentions -->
+    <g transform="translate(0,370)">
+      <rect class="card" x="0" y="0" width="384" height="290" rx="8"/>
+      <path class="sheet" d="M64 66 h52 l24 24 v76 h-76 z"/>
+      <path class="glyph" d="M116 66 v24 h24"/>
+      <line class="sheetline" x1="78" y1="112" x2="126" y2="112"/>
+      <line class="sheetline" x1="78" y1="128" x2="126" y2="128"/>
+      <circle class="ring" cx="264" cy="86" r="28"/>
+      <circle class="glyph" cx="264" cy="78" r="8"/>
+      <path class="glyph" d="M248 102 a18 16 0 0 1 32 0"/>
+      <circle class="ring" cx="264" cy="176" r="28"/>
+      <path class="glyph" d="M250 183 v-10 l14 -11 l14 11 v10 z"/>
+      <line x1="146" y1="96" x2="228" y2="88" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk1-ink)"/>
+      <line x1="146" y1="130" x2="228" y2="168" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk1-ink)"/>
+      <text class="t-pill" x="182" y="72" text-anchor="middle">MENTIONS</text>
+      <text class="t-name" x="192" y="228" text-anchor="middle">Mentions</text>
+      <text class="t-cap" x="192" y="254" text-anchor="middle">provenance: each episode keeps who it spoke of</text>
+    </g>
+    <!-- Card 6: Community -->
+    <g transform="translate(408,370)">
+      <rect class="card" x="0" y="0" width="384" height="290" rx="8"/>
+      <circle cx="192" cy="122" r="86" fill="#F2E7CE" stroke="#A9812F" stroke-width="2.8"/>
+      <circle class="ring" cx="156" cy="96" r="24"/>
+      <circle class="glyph" cx="156" cy="89" r="7"/>
+      <path class="glyph" d="M143 110 a15 13 0 0 1 26 0"/>
+      <circle class="ring" cx="232" cy="102" r="24"/>
+      <path class="glyph" d="M220 108 v-9 l12 -9 l12 9 v9 z"/>
+      <circle class="ring" cx="192" cy="164" r="24"/>
+      <circle class="glyph" cx="186" cy="158" r="5"/><circle class="glyph" cx="198" cy="158" r="5"/>
+      <circle class="glyph" cx="192" cy="169" r="5"/>
+      <line x1="176" y1="106" x2="212" y2="98" stroke="#918B7F" stroke-width="2.4"/>
+      <line x1="166" y1="116" x2="182" y2="146" stroke="#918B7F" stroke-width="2.4"/>
+      <text class="t-name" x="192" y="248" text-anchor="middle">Community</text>
+      <text class="t-cap" x="192" y="272" text-anchor="middle">clusters by label-spreading; rebuilt whole, never edited</text>
+    </g>
+    <!-- Card 7: Saga -->
+    <g transform="translate(816,370)">
+      <rect class="card" x="0" y="0" width="384" height="290" rx="8"/>
+      <rect x="122" y="46" width="140" height="34" rx="17" fill="#F2E7CE" stroke="#2B2721" stroke-width="2.6"/>
+      <text class="t-pill" x="192" y="68" text-anchor="middle">MIRA·CAREER</text>
+      <g>
+        <path class="sheet" d="M96 122 h40 l18 18 v50 h-58 z"/>
+        <path class="sheet" d="M204 122 h40 l18 18 v50 h-58 z"/>
+        <path class="sheet" d="M312 122 h40 l18 18 v50 h-58 z"/>
+      </g>
+      <text class="t-lab" x="125" y="216" text-anchor="middle">2015</text>
+      <text class="t-lab" x="233" y="216" text-anchor="middle">2017</text>
+      <text class="t-lab" x="341" y="216" text-anchor="middle">2023</text>
+      <line x1="158" y1="158" x2="200" y2="158" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk1-ink)"/>
+      <line x1="266" y1="158" x2="308" y2="158" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk1-ink)"/>
+      <line x1="160" y1="84" x2="122" y2="118" stroke="#918B7F" stroke-width="2" stroke-dasharray="4 5"/>
+      <line x1="192" y1="84" x2="230" y2="118" stroke="#918B7F" stroke-width="2" stroke-dasharray="4 5"/>
+      <line x1="224" y1="84" x2="336" y2="118" stroke="#918B7F" stroke-width="2" stroke-dasharray="4 5"/>
+      <text class="t-name" x="192" y="248" text-anchor="middle">Saga</text>
+      <text class="t-cap" x="192" y="272" text-anchor="middle">a named thread of episodes, in event-time order</text>
+    </g>
+  </svg>

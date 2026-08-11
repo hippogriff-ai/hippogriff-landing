@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="plate2" viewBox="0 0 1200 675" role="img" aria-label="Plate II: the eight-step ingestion pipeline walked with the 2023 episode — context, episode, extraction, resolution, the date fight, enrichment, commit">
+  <rect x="0" y="0" width="1200" height="675" fill="#F4F1EA"/>
+    <defs>
+      <marker id="mk2-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2721"/></marker>
+      <marker id="mk2-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A9812F"/></marker>
+      <marker id="mk2-grey" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#918B7F"/></marker>
+    </defs>
+    <style>
+      .p2-chipring { fill: none; stroke: #A9812F; stroke-width: 2.4; }
+      .p2-chipnum { font-size: 14px; fill: #A9812F; }
+      .p2-chipname { font-size: 16px; fill: #2B2721; }
+      .p2-zone { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p2-ring { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.8; }
+      .p2-ringdash { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.6; stroke-dasharray: 5 5; }
+      .p2-glyph { stroke: #2B2721; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .p2-sheet { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.6; stroke-linejoin: round; }
+      .p2-sheetg { fill: #EFEAE0; stroke: #918B7F; stroke-width: 2.4; stroke-linejoin: round; }
+      .p2-line { stroke: #B7B1A4; stroke-width: 2.4; stroke-linecap: round; }
+      .p2-name { font-size: 14px; fill: #2B2721; }
+      .p2-small { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p2-pill-g { fill: #F2E7CE; stroke: #A9812F; stroke-width: 2.6; }
+      .p2-pill-x { fill: #E9E4DA; stroke: #918B7F; stroke-width: 2.6; }
+      .p2-pilltext { font-size: 12px; letter-spacing: 1.5px; fill: #2B2721; }
+      .p2-gold { font-size: 13px; fill: #A9812F; }
+      .p2-grey { font-size: 13px; fill: #918B7F; }
+      .p2-x { stroke: #C0913B; stroke-width: 4.4; stroke-linecap: round; }
+      .p2-edge-g { stroke: #A9812F; stroke-width: 3.2; fill: none; }
+      .p2-edge-x { stroke: #918B7F; stroke-width: 3.2; fill: none; }
+      .p2-new { font-size: 12px; letter-spacing: 1.5px; fill: #A9812F; }
+    </style>
+
+    <!-- Stage chips -->
+    <g>
+      <circle class="p2-chipring" cx="20" cy="20" r="13"/><text class="p2-chipnum" x="20" y="25" text-anchor="middle">1</text>
+      <text class="p2-chipname" x="42" y="25">Context</text>
+      <circle class="p2-chipring" cx="138" cy="20" r="13"/><text class="p2-chipnum" x="138" y="25" text-anchor="middle">2</text>
+      <text class="p2-chipname" x="160" y="25">Episode</text>
+      <circle class="p2-chipring" cx="256" cy="20" r="13"/><text class="p2-chipnum" x="256" y="25" text-anchor="middle">3</text>
+      <text class="p2-chipname" x="278" y="25">Names out</text>
+      <circle class="p2-chipring" cx="396" cy="20" r="13"/><text class="p2-chipnum" x="396" y="25" text-anchor="middle">4</text>
+      <text class="p2-chipname" x="418" y="25">Names matched</text>
+      <circle class="p2-chipring" cx="576" cy="20" r="13"/><text class="p2-chipnum" x="576" y="25" text-anchor="middle">5</text>
+      <text class="p2-chipname" x="598" y="25">Facts</text>
+      <circle class="p2-chipring" cx="668" cy="20" r="13"/><text class="p2-chipnum" x="668" y="25" text-anchor="middle">6</text>
+      <text class="p2-chipname" x="690" y="25">Date fight</text>
+      <circle class="p2-chipring" cx="806" cy="20" r="13"/><text class="p2-chipnum" x="806" y="25" text-anchor="middle">7</text>
+      <text class="p2-chipname" x="828" y="25">Enrich</text>
+      <circle class="p2-chipring" cx="916" cy="20" r="13"/><text class="p2-chipnum" x="916" y="25" text-anchor="middle">8</text>
+      <text class="p2-chipname" x="938" y="25">Commit</text>
+    </g>
+
+    <!-- Zone 1-2: context + the new episode -->
+    <g transform="translate(0,56)">
+      <path class="p2-sheetg" d="M10 8 h44 l16 16 v48 h-60 z"/>
+      <text class="p2-name" x="22" y="32">E1</text><text class="p2-small" x="22" y="50">2015</text>
+      <path class="p2-sheetg" d="M84 8 h44 l16 16 v48 h-60 z"/>
+      <text class="p2-name" x="96" y="32">E2</text><text class="p2-small" x="96" y="50">2017</text>
+      <text class="p2-zone" x="10" y="98">what the graph read last (10 ride along)</text>
+      <path class="p2-sheet" d="M10 122 h112 l24 24 v118 h-136 z"/>
+      <text class="p2-small" x="24" y="154">"Mira left Château</text>
+      <text class="p2-small" x="24" y="172">Nord for Château</text>
+      <text class="p2-small" x="24" y="190">Sud, trading Gamay</text>
+      <text class="p2-small" x="24" y="208">for Cabernet Franc."</text>
+      <text class="p2-name" x="24" y="236">E3 · 2023</text>
+    </g>
+
+    <!-- Zone 3-4: names out (dashed) -> matched -->
+    <g transform="translate(232,56)">
+      <circle class="p2-ringdash" cx="34" cy="26" r="24"/>
+      <circle class="p2-glyph" cx="34" cy="19" r="7"/><path class="p2-glyph" d="M21 40 a15 13 0 0 1 26 0"/>
+      <text class="p2-name" x="34" y="66" text-anchor="middle">Mira</text>
+      <line x1="62" y1="26" x2="116" y2="26" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk2-ink)"/>
+      <text class="p2-name" x="128" y="22">already known</text>
+      <text class="p2-small" x="128" y="40">one candidate had exactly this name</text>
+
+      <circle class="p2-ringdash" cx="34" cy="112" r="24"/>
+      <path class="p2-glyph" d="M22 119 v-9 l12 -10 l12 10 v9 z"/>
+      <text class="p2-name" x="34" y="152" text-anchor="middle">Château Nord</text>
+      <line x1="62" y1="112" x2="116" y2="112" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk2-ink)"/>
+      <text class="p2-name" x="128" y="108">already known</text>
+      <text class="p2-small" x="128" y="126">from the 2015 episode</text>
+
+      <circle class="p2-ringdash" cx="34" cy="198" r="24"/>
+      <path class="p2-glyph" d="M22 205 v-9 l12 -10 l12 10 v9 z"/>
+      <text class="p2-name" x="34" y="238" text-anchor="middle">Château Sud</text>
+      <line x1="62" y1="198" x2="116" y2="198" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk2-ink)"/>
+      <text class="p2-name" x="128" y="194">already known</text>
+      <text class="p2-small" x="128" y="212">from the 2017 episode</text>
+
+      <circle class="p2-ringdash" cx="34" cy="284" r="24"/>
+      <circle class="p2-glyph" cx="29" cy="278" r="5"/><circle class="p2-glyph" cx="39" cy="278" r="5"/>
+      <circle class="p2-glyph" cx="34" cy="288" r="5"/>
+      <text class="p2-name" x="34" y="324" text-anchor="middle">Gamay</text>
+      <line x1="62" y1="284" x2="116" y2="284" stroke="#2B2721" stroke-width="2.8" marker-end="url(#mk2-ink)"/>
+      <text class="p2-name" x="128" y="280">already known</text>
+      <text class="p2-small" x="128" y="298">from the 2015 episode</text>
+
+      <circle class="p2-ringdash" cx="34" cy="370" r="24"/>
+      <circle class="p2-glyph" cx="29" cy="364" r="5"/><circle class="p2-glyph" cx="39" cy="364" r="5"/>
+      <circle class="p2-glyph" cx="34" cy="374" r="5"/>
+      <text class="p2-name" x="34" y="410" text-anchor="middle">Cabernet Franc</text>
+      <line x1="62" y1="370" x2="116" y2="370" stroke="#A9812F" stroke-width="2.8" marker-end="url(#mk2-gold)"/>
+      <text class="p2-new" x="128" y="366">NEW NODE</text>
+      <text class="p2-small" x="128" y="384">no candidate anywhere — minted</text>
+      <text class="p2-zone" x="10" y="448">dashed = provisional, in memory only</text>
+    </g>
+
+    <!-- Zone 5: the date fight graph -->
+    <g transform="translate(548,56)">
+      <circle class="p2-ring" cx="60" cy="205" r="32"/>
+      <circle class="p2-glyph" cx="60" cy="196" r="9"/><path class="p2-glyph" d="M43 222 a19 17 0 0 1 34 0"/>
+      <text class="p2-name" x="60" y="254" text-anchor="middle">Mira</text>
+
+      <path class="p2-edge-x" d="M88 185 C 130 130, 190 90, 238 72"/>
+      <rect class="p2-pill-x" x="126" y="92" width="88" height="26" rx="13"/>
+      <text class="p2-pilltext" x="170" y="110" text-anchor="middle">WORKS_AT</text>
+      <text class="p2-grey" x="150" y="82" text-anchor="middle">valid 2015 · closed 2023</text>
+      <line class="p2-x" x1="228" y1="64" x2="242" y2="78"/>
+      <line class="p2-x" x1="242" y1="64" x2="228" y2="78"/>
+      <circle class="p2-ring" cx="272" cy="60" r="27"/>
+      <path class="p2-glyph" d="M259 67 v-10 l13 -11 l13 11 v10 z"/>
+      <text class="p2-name" x="272" y="102" text-anchor="middle">Château Nord</text>
+
+      <path class="p2-edge-g" d="M92 199 C 140 196, 190 193, 238 191" marker-end="url(#mk2-gold)"/>
+      <rect class="p2-pill-g" x="126" y="176" width="88" height="26" rx="13"/>
+      <text class="p2-pilltext" x="170" y="194" text-anchor="middle">WORKS_AT</text>
+      <text class="p2-gold" x="170" y="168" text-anchor="middle">valid 2023</text>
+      <circle class="p2-ring" cx="272" cy="190" r="27"/>
+      <path class="p2-glyph" d="M259 197 v-10 l13 -11 l13 11 v10 z"/>
+      <text class="p2-name" x="272" y="232" text-anchor="middle">Château Sud</text>
+
+      <path class="p2-edge-x" d="M88 224 C 130 258, 186 288, 240 300"/>
+      <rect class="p2-pill-x" x="122" y="252" width="96" height="26" rx="13"/>
+      <text class="p2-pilltext" x="170" y="270" text-anchor="middle">WORKS_WITH</text>
+      <text class="p2-grey" x="150" y="296" text-anchor="middle">valid 2015 · closed 2023</text>
+      <line class="p2-x" x1="230" y1="288" x2="244" y2="302"/>
+      <line class="p2-x" x1="244" y1="288" x2="230" y2="302"/>
+      <circle class="p2-ring" cx="274" cy="306" r="27"/>
+      <circle class="p2-glyph" cx="268" cy="300" r="6"/><circle class="p2-glyph" cx="280" cy="300" r="6"/>
+      <circle class="p2-glyph" cx="274" cy="312" r="6"/>
+      <text class="p2-name" x="274" y="348" text-anchor="middle">Gamay</text>
+
+      <path class="p2-edge-g" d="M84 230 C 120 300, 170 380, 228 408" marker-end="url(#mk2-gold)"/>
+      <rect class="p2-pill-g" x="112" y="342" width="96" height="26" rx="13"/>
+      <text class="p2-pilltext" x="160" y="360" text-anchor="middle">WORKS_WITH</text>
+      <text class="p2-gold" x="160" y="386" text-anchor="middle">valid 2023</text>
+      <circle class="p2-ring" cx="262" cy="420" r="27"/>
+      <circle class="p2-glyph" cx="256" cy="414" r="6"/><circle class="p2-glyph" cx="268" cy="414" r="6"/>
+      <circle class="p2-glyph" cx="262" cy="426" r="6"/>
+      <text class="p2-name" x="262" y="462" text-anchor="middle">Cabernet Franc</text>
+
+      <text class="p2-zone" x="10" y="500">newer world-date wins; the loser is stamped, kept</text>
+    </g>
+
+    <!-- Zone 6: enrich -->
+    <g transform="translate(920,56)">
+      <rect x="0" y="40" width="260" height="120" rx="6" fill="#FDFCF9" stroke="#2B2721" stroke-width="2.6"/>
+      <text class="p2-name" x="16" y="66">Mira · summary</text>
+      <line class="p2-line" x1="16" y1="84" x2="244" y2="84"/>
+      <line class="p2-line" x1="16" y1="100" x2="244" y2="100"/>
+      <line x1="16" y1="118" x2="244" y2="118" stroke="#A9812F" stroke-width="2.8" stroke-linecap="round"/>
+      <line x1="16" y1="136" x2="196" y2="136" stroke="#A9812F" stroke-width="2.8" stroke-linecap="round"/>
+      <text class="p2-small" x="0" y="184">facts copied in (LLM condenses if long)</text>
+      <rect x="12" y="204" width="256" height="100" rx="6" fill="#FDFCF9" stroke="#2B2721" stroke-width="2.6"/>
+      <text class="p2-name" x="28" y="230">Château Nord · summary</text>
+      <line class="p2-line" x1="28" y1="248" x2="252" y2="248"/>
+      <line x1="28" y1="266" x2="252" y2="266" stroke="#A9812F" stroke-width="2.8" stroke-linecap="round"/>
+      <text class="p2-small" x="12" y="330">both endpoints get the line</text>
+    </g>
+
+    <!-- Zone 7: commit -->
+    <g transform="translate(0,560)">
+      <rect x="10" y="0" width="1180" height="100" rx="10" fill="none" stroke="#A9812F" stroke-width="3" stroke-dasharray="10 8"/>
+      <ellipse cx="80" cy="32" rx="30" ry="11" fill="#F2E7CE" stroke="#2B2721" stroke-width="2.6"/>
+      <path d="M50 32 v32 a30 11 0 0 0 60 0 v-32" fill="#F2E7CE" stroke="#2B2721" stroke-width="2.6"/>
+      <text class="p2-name" x="132" y="38">one transaction — episode, MENTIONS, entities, facts, stamps land together</text>
+      <text class="p2-small" x="132" y="66">until here everything lives only in memory — dashed rings never touch the database; a crash loses the batch cleanly</text>
+    </g>
+  </svg>
