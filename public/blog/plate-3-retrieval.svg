@@ -39,7 +39,7 @@
       <rect class="p3-fuse" x="504" y="40" width="240" height="48" rx="8"/>
       <text class="p3-fusetext" x="624" y="62" text-anchor="middle">RRF · fuse by rank</text>
       <text class="p3-alt" x="624" y="80" text-anchor="middle">the shipped default recipe</text>
-      <text class="p3-alt" x="764" y="56">also: mmr · LLM judge ·</text>
+      <text class="p3-alt" x="764" y="56">also: mmr · cross-encoder ·</text>
       <text class="p3-alt" x="764" y="74">node-distance · episode-mentions</text>
       <line class="p3-lane" x1="960" y1="64" x2="1030" y2="64" marker-end="url(#mk3-ink)"/>
       <text class="p3-out" x="1044" y="70">top 10</text>
@@ -73,7 +73,7 @@
       <path class="p3-lane" d="M350 40 H 500" marker-end="url(#mk3-ink)"/>
       <rect class="p3-fuse" x="504" y="16" width="240" height="48" rx="8"/>
       <text class="p3-fusetext" x="624" y="38" text-anchor="middle">RRF · fuse by rank</text>
-      <text class="p3-alt" x="624" y="56" text-anchor="middle">or the LLM judge</text>
+      <text class="p3-alt" x="624" y="56" text-anchor="middle">or cross-encoder</text>
       <line class="p3-lane" x1="960" y1="40" x2="1030" y2="40" marker-end="url(#mk3-ink)"/>
       <text class="p3-out" x="1044" y="46">top 10</text>
       <line class="p3-rowline" x1="10" y1="110" x2="1190" y2="110"/>
@@ -89,10 +89,10 @@
       <path class="p3-lane" d="M350 64 H 420 C 460 64, 460 40, 500 40" marker-end="url(#mk3-ink)"/>
       <rect class="p3-fuse" x="504" y="16" width="240" height="48" rx="8"/>
       <text class="p3-fusetext" x="624" y="38" text-anchor="middle">RRF · fuse by rank</text>
-      <text class="p3-alt" x="624" y="56" text-anchor="middle">or mmr · LLM judge</text>
+      <text class="p3-alt" x="624" y="56" text-anchor="middle">or mmr · cross-encoder</text>
       <line class="p3-lane" x1="960" y1="40" x2="1030" y2="40" marker-end="url(#mk3-ink)"/>
       <text class="p3-out" x="1044" y="46">top 10</text>
     </g>
 
-    <text class="p3-note" x="10" y="655">dashed arm = off in the default recipe; the graph walk runs only in the LLM-judge recipes</text>
+    <text class="p3-note" x="10" y="655">dashed arm = off by default; only the cross-encoder recipes (a cross-encoder here means an LLM judge) turn the graph walk on</text>
   </svg>

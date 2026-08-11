@@ -52,16 +52,16 @@
     <!-- Card 3: Fact -->
     <g transform="translate(612,15)">
       <rect class="card" x="0" y="0" width="282" height="290" rx="8"/>
-      <circle class="ring" cx="58" cy="104" r="30"/>
-      <circle class="glyph" cx="58" cy="95" r="9"/>
-      <path class="glyph" d="M40 122 a20 18 0 0 1 36 0"/>
+      <circle class="ring" cx="46" cy="104" r="30"/>
+      <circle class="glyph" cx="46" cy="95" r="9"/>
+      <path class="glyph" d="M28 122 a20 18 0 0 1 36 0"/>
       <circle class="ring" cx="226" cy="104" r="30"/>
       <path class="glyph" d="M210 112 v-12 l16 -12 l16 12 v12 z M222 112 v-9 h8 v9"/>
-      <line x1="88" y1="104" x2="102" y2="104" stroke="#2B2721" stroke-width="3"/>
-      <rect class="pill" x="102" y="88" width="94" height="32" rx="16"/>
-      <text class="t-pill" x="149" y="109" text-anchor="middle">WORKS_AT</text>
-      <line x1="196" y1="104" x2="194" y2="104" stroke="#2B2721" stroke-width="3" marker-end="url(#mk1-ink)"/>
-      <text class="t-date-g" x="149" y="146" text-anchor="middle">valid 2015</text>
+      <line x1="76" y1="104" x2="88" y2="104" stroke="#2B2721" stroke-width="3"/>
+      <rect class="pill" x="88" y="88" width="94" height="32" rx="16"/>
+      <text class="t-pill" x="135" y="109" text-anchor="middle">WORKS_AT</text>
+      <line x1="182" y1="104" x2="193" y2="104" stroke="#2B2721" stroke-width="3" marker-end="url(#mk1-ink)"/>
+      <text class="t-date-g" x="135" y="146" text-anchor="middle">valid 2015</text>
       <text class="t-name" x="141" y="228" text-anchor="middle">Fact</text>
       <text class="t-cap" x="141" y="254" text-anchor="middle">one dated sentence joining two entities</text>
     </g>
