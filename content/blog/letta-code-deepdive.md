@@ -27,7 +27,7 @@ The memory folder holds two kinds: memory blocks and external memory.
 > Memory blocks are editable segments of the system prompt. Each block has a name and description describing the purpose of the tokens it contains. Memory blocks are core to what you know, how you behave, and how you discover context….Reserve them for durable knowledge that shapes who you are and how you act, plus the indexes that let you discover everything else…Prefer compact indexes and behavioral rules over bulk content — move detail to external memory.
 
 ![Memory block captured inside an actual LLM request](/blog/letta/memory-block-screenshot.png)
-*Fig 2: the compiled memory block, byte-for-byte, inside a real request. Not documentation, a capture.*
+*Fig 2: the compiled memory block inside a real request. Not documentation, a capture.*
 
 **External memory.** External memory is part of the memory folder but its content does not get loaded into the system prompt. A file tree of the external memory gets loaded and exposed progressively.  Here is how the instruction looks in Letta Code’s system prompt:
 
@@ -54,7 +54,7 @@ The memory repo is initialized automatically based off a boilerplate, seeded wit
 
 Memory files are in .md format, with frontmatter describing the purpose of the file.
 
-Here is a snippet from my agent's `system/human.md`, written by the agent in-band over several conversations:
+Here is a snippet from my agent's `system/human.md`, written by the agent in-band over several made-up conversations:
 
 ```markdown
 ---
