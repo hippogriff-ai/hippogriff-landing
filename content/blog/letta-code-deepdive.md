@@ -20,15 +20,16 @@ image: "/blog/letta/d1-three-layers.png"
 
 ## Anatomy of memory
 
-1. Memory blocks and external memory.
-    1. Memory block is loaded in context and it's short, condensed, high level. Here's the relevant system prompt related to it:
+The memory folder holds two kinds: memory blocks and external memory.
 
-    > Memory blocks are editable segments of the system prompt. Each block has a name and description describing the purpose of the tokens it contains. Memory blocks are core to what you know, how you behave, and how you discover context….Reserve them for durable knowledge that shapes who you are and how you act, plus the indexes that let you discover everything else…Prefer compact indexes and behavioral rules over bulk content — move detail to external memory.
+**Memory blocks.** Memory block is loaded in context and it's short, condensed, high level. Here's the relevant system prompt related to it:
 
-    ![Memory block captured inside an actual LLM request](/blog/letta/memory-block-screenshot.png)
-    *Fig: the compiled memory block, byte-for-byte, inside a real request — not documentation, a capture.*
+> Memory blocks are editable segments of the system prompt. Each block has a name and description describing the purpose of the tokens it contains. Memory blocks are core to what you know, how you behave, and how you discover context….Reserve them for durable knowledge that shapes who you are and how you act, plus the indexes that let you discover everything else…Prefer compact indexes and behavioral rules over bulk content — move detail to external memory.
 
-    2. External memory is part of the memory folder but its content does not get loaded into the system prompt. A file tree of the external memory gets loaded and exposed progressively.  Here is how the instruction looks in Letta Code’s system prompt:
+![Memory block captured inside an actual LLM request](/blog/letta/memory-block-screenshot.png)
+*Fig: the compiled memory block, byte-for-byte, inside a real request — not documentation, a capture.*
+
+**External memory.** External memory is part of the memory folder but its content does not get loaded into the system prompt. A file tree of the external memory gets loaded and exposed progressively.  Here is how the instruction looks in Letta Code’s system prompt:
 
 > **External memory (skills, markdown, & other files)**
 >
@@ -132,7 +133,7 @@ Dream agent is an out-of-band agent that reads the transcript of the conversatio
     * Upon the compaction, which is a logically good pause point to really reflect and modify the memory.
     * It could also be triggered explicitly by the user.
 
-3. What if there's a conflict? Here is the magic of Git again. Dream Agent will leverage the worktree to work on a copy of the memory. Once it's done it will try to merge into the parent branch and that will kick off the Git mechanism which I will talk about in the next section.
+3. What if there's a conflict? Here is the magic of Git again. Dream Agent will leverage the worktree to work on a copy of the memory. Once it's done, the harness will try to `git merge` into the parent branch. More on the merging mechanism in the following section.
 
 
 **What can dream agent change:**
