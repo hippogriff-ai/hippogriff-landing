@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="plate3" viewBox="0 0 1200 675" role="img" aria-label="Plate III: retrieval — four scopes (facts, entities, episodes, communities), each with its arms and rerankers">
+  <rect x="0" y="0" width="1200" height="675" fill="#F4F1EA"/>
+    <defs>
+      <marker id="mk3-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2721"/></marker>
+      <marker id="mk3-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A9812F"/></marker>
+      <marker id="mk3-grey" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#918B7F"/></marker>
+    </defs>
+    <style>
+      .p3-q { fill: #F2E7CE; stroke: #2B2721; stroke-width: 2.8; }
+      .p3-scope { font-size: 20px; fill: #2B2721; }
+      .p3-scopecap { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p3-arm { fill: #FDFCF9; stroke: #A9812F; stroke-width: 2.6; }
+      .p3-armoff { fill: #FDFCF9; stroke: #918B7F; stroke-width: 2.4; stroke-dasharray: 5 5; }
+      .p3-armtext { font-size: 14px; fill: #2B2721; }
+      .p3-armofftext { font-size: 14px; fill: #6B655A; }
+      .p3-fuse { fill: #F2E7CE; stroke: #2B2721; stroke-width: 2.8; }
+      .p3-fusetext { font-size: 15px; fill: #2B2721; }
+      .p3-alt { font-size: 12.5px; fill: #6B655A; }
+      .p3-lane { stroke: #2B2721; stroke-width: 2.6; fill: none; }
+      .p3-out { font-size: 15px; fill: #A9812F; }
+      .p3-note { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p3-rowline { stroke: #DFD8C8; stroke-width: 1.6; }
+    </style>
+
+    <rect class="p3-q" x="10" y="10" width="330" height="44" rx="22"/>
+    <text class="p3-armtext" x="175" y="38" text-anchor="middle" font-style="italic">"Where does Mira work now?"</text>
+    <line class="p3-lane" x1="175" y1="54" x2="175" y2="86" marker-end="url(#mk3-ink)"/>
+
+    <!-- Row: FACTS -->
+    <g transform="translate(0,92)">
+      <text class="p3-scope" x="10" y="34">Facts</text>
+      <text class="p3-scopecap" x="10" y="54">the default scope</text>
+      <rect class="p3-arm" x="200" y="0" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="24" text-anchor="middle">keyword · BM25</text>
+      <rect class="p3-arm" x="200" y="46" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="70" text-anchor="middle">cosine · full scan</text>
+      <rect class="p3-armoff" x="200" y="92" width="150" height="36" rx="18"/><text class="p3-armofftext" x="275" y="116" text-anchor="middle">graph walk ≤ 3</text>
+      <path class="p3-lane" d="M350 18 H 420 C 460 18, 460 64, 500 64" />
+      <path class="p3-lane" d="M350 64 H 500" />
+      <path class="p3-lane" d="M350 110 H 420 C 460 110, 460 64, 500 64" marker-end="url(#mk3-ink)"/>
+      <rect class="p3-fuse" x="504" y="40" width="240" height="48" rx="8"/>
+      <text class="p3-fusetext" x="624" y="62" text-anchor="middle">RRF · fuse by rank</text>
+      <text class="p3-alt" x="624" y="80" text-anchor="middle">the shipped default recipe</text>
+      <text class="p3-alt" x="764" y="56">also: mmr · cross-encoder ·</text>
+      <text class="p3-alt" x="764" y="74">node-distance · episode-mentions</text>
+      <line class="p3-lane" x1="960" y1="64" x2="1030" y2="64" marker-end="url(#mk3-ink)"/>
+      <text class="p3-out" x="1044" y="70">top 10</text>
+      <line class="p3-rowline" x1="10" y1="150" x2="1190" y2="150"/>
+    </g>
+
+    <!-- Row: ENTITIES -->
+    <g transform="translate(0,250)">
+      <text class="p3-scope" x="10" y="34">Entities</text>
+      <text class="p3-scopecap" x="10" y="54">names + summaries</text>
+      <rect class="p3-arm" x="200" y="0" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="24" text-anchor="middle">keyword · BM25</text>
+      <rect class="p3-arm" x="200" y="46" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="70" text-anchor="middle">cosine · full scan</text>
+      <rect class="p3-armoff" x="200" y="92" width="150" height="36" rx="18"/><text class="p3-armofftext" x="275" y="116" text-anchor="middle">graph walk ≤ 3</text>
+      <path class="p3-lane" d="M350 18 H 420 C 460 18, 460 64, 500 64" />
+      <path class="p3-lane" d="M350 64 H 500" />
+      <path class="p3-lane" d="M350 110 H 420 C 460 110, 460 64, 500 64" marker-end="url(#mk3-ink)"/>
+      <rect class="p3-fuse" x="504" y="40" width="240" height="48" rx="8"/>
+      <text class="p3-fusetext" x="624" y="62" text-anchor="middle">RRF · fuse by rank</text>
+      <text class="p3-alt" x="624" y="80" text-anchor="middle">same five rerankers offered</text>
+      <line class="p3-lane" x1="960" y1="64" x2="1030" y2="64" marker-end="url(#mk3-ink)"/>
+      <text class="p3-out" x="1044" y="70">top 10</text>
+      <line class="p3-rowline" x1="10" y1="150" x2="1190" y2="150"/>
+    </g>
+
+    <!-- Row: EPISODES -->
+    <g transform="translate(0,408)">
+      <text class="p3-scope" x="10" y="34">Episodes</text>
+      <text class="p3-scopecap" x="10" y="54">raw text rows</text>
+      <rect class="p3-arm" x="200" y="22" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="46" text-anchor="middle">keyword · BM25</text>
+      <text class="p3-note" x="200" y="80">one arm only — episode content is never embedded</text>
+      <path class="p3-lane" d="M350 40 H 500" marker-end="url(#mk3-ink)"/>
+      <rect class="p3-fuse" x="504" y="16" width="240" height="48" rx="8"/>
+      <text class="p3-fusetext" x="624" y="38" text-anchor="middle">RRF · fuse by rank</text>
+      <text class="p3-alt" x="624" y="56" text-anchor="middle">or cross-encoder</text>
+      <line class="p3-lane" x1="960" y1="40" x2="1030" y2="40" marker-end="url(#mk3-ink)"/>
+      <text class="p3-out" x="1044" y="46">top 10</text>
+      <line class="p3-rowline" x1="10" y1="110" x2="1190" y2="110"/>
+    </g>
+
+    <!-- Row: COMMUNITIES -->
+    <g transform="translate(0,532)">
+      <text class="p3-scope" x="10" y="34">Communities</text>
+      <text class="p3-scopecap" x="10" y="54">one-sentence names</text>
+      <rect class="p3-arm" x="200" y="0" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="24" text-anchor="middle">keyword · BM25</text>
+      <rect class="p3-arm" x="200" y="46" width="150" height="36" rx="18"/><text class="p3-armtext" x="275" y="70" text-anchor="middle">cosine · full scan</text>
+      <path class="p3-lane" d="M350 18 H 420 C 460 18, 460 40, 500 40" />
+      <path class="p3-lane" d="M350 64 H 420 C 460 64, 460 40, 500 40" marker-end="url(#mk3-ink)"/>
+      <rect class="p3-fuse" x="504" y="16" width="240" height="48" rx="8"/>
+      <text class="p3-fusetext" x="624" y="38" text-anchor="middle">RRF · fuse by rank</text>
+      <text class="p3-alt" x="624" y="56" text-anchor="middle">or mmr · cross-encoder</text>
+      <line class="p3-lane" x1="960" y1="40" x2="1030" y2="40" marker-end="url(#mk3-ink)"/>
+      <text class="p3-out" x="1044" y="46">top 10</text>
+    </g>
+
+    <text class="p3-note" x="10" y="655">dashed arm = off by default; only the cross-encoder recipes (a cross-encoder here means an LLM judge) turn the graph walk on</text>
+  </svg>

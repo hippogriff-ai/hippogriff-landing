@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="plate4" viewBox="0 0 1200 675" role="img" aria-label="Plate IV: remove_episode(E1) — the episode dies, its first-authored facts die, its solely-mentioned entities die; closed stamps on surviving facts persist">
+  <rect x="0" y="0" width="1200" height="675" fill="#F4F1EA"/>
+    <defs>
+      <marker id="mk4-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2721"/></marker>
+      <marker id="mk4-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A9812F"/></marker>
+      <marker id="mk4-grey" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#918B7F"/></marker>
+    </defs>
+    <style>
+      .p4-sheet { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.8; stroke-linejoin: round; }
+      .p4-ring { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.8; }
+      .p4-glyph { stroke: #2B2721; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .p4-name { font-size: 14px; fill: #2B2721; }
+      .p4-small { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p4-x { stroke: #C0913B; stroke-width: 4.4; stroke-linecap: round; }
+      .p4-edge-dead { stroke: #918B7F; stroke-width: 3; fill: none; stroke-dasharray: 7 7; }
+      .p4-edge-x { stroke: #918B7F; stroke-width: 3.2; fill: none; }
+      .p4-edge-g { stroke: #A9812F; stroke-width: 3.2; fill: none; }
+      .p4-pill-g { fill: #F2E7CE; stroke: #A9812F; stroke-width: 2.6; }
+      .p4-pill-x { fill: #E9E4DA; stroke: #918B7F; stroke-width: 2.6; }
+      .p4-pill-dead { fill: #FDFCF9; stroke: #918B7F; stroke-width: 2.4; stroke-dasharray: 5 5; }
+      .p4-pilltext { font-size: 12px; letter-spacing: 1.5px; fill: #2B2721; }
+      .p4-gold { font-size: 13px; fill: #A9812F; }
+      .p4-grey { font-size: 13px; fill: #918B7F; }
+      .p4-zone { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p4-doors { font-size: 13px; fill: #6B655A; }
+    </style>
+
+    <!-- The call -->
+    <g transform="translate(10,120)">
+      <path class="p4-sheet" d="M20 20 h72 l30 30 v96 h-102 z"/>
+            <line class="p4-glyph" x1="40" y1="84" x2="104" y2="84" stroke="#B7B1A4"/>
+      <line class="p4-glyph" x1="40" y1="102" x2="104" y2="102" stroke="#B7B1A4"/>
+      <line class="p4-x" x1="42" y1="42" x2="100" y2="124"/>
+      <line class="p4-x" x1="100" y1="42" x2="42" y2="124"/>
+      <text class="p4-small" x="18" y="166">E1 · 2015</text>
+      <text class="p4-name" x="18" y="188">remove_episode(E1)</text>
+      <text class="p4-small" x="18" y="206">the 2015 clipping is withdrawn</text>
+      <text class="p4-small" x="18" y="248">then, in order, no transaction:</text>
+      <text class="p4-grey" x="18" y="270">1 · facts it first authored</text>
+      <text class="p4-grey" x="18" y="290">2 · entities only it mentioned</text>
+      <text class="p4-grey" x="18" y="310">3 · the episode itself</text>
+    </g>
+
+    <!-- The graph after -->
+    <g transform="translate(360,120)">
+      <circle class="p4-ring" cx="90" cy="240" r="36"/>
+      <circle class="p4-glyph" cx="90" cy="229" r="10"/><path class="p4-glyph" d="M70 260 a22 20 0 0 1 40 0"/>
+      <text class="p4-name" x="90" y="296" text-anchor="middle">Mira</text>
+      <text class="p4-small" x="90" y="314" text-anchor="middle">survives — E3 still mentions her</text>
+
+      <!-- deleted fact: WORKS_AT Nord (first-authored by E1) -->
+      <path class="p4-edge-dead" d="M122 216 C 170 160, 230 120, 290 104"/>
+      <rect class="p4-pill-dead" x="164" y="128" width="92" height="28" rx="14"/>
+      <text class="p4-pilltext" x="210" y="147" text-anchor="middle">WORKS_AT</text>
+      <line class="p4-x" x1="272" y1="98" x2="290" y2="116"/>
+      <line class="p4-x" x1="290" y1="98" x2="272" y2="116"/>
+      <text class="p4-grey" x="180" y="88" text-anchor="middle">deleted — E1 was its first author</text>
+      <circle class="p4-ring" cx="330" cy="94" r="32"/>
+      <path class="p4-glyph" d="M314 102 v-12 l16 -13 l16 13 v12 z"/>
+      <text class="p4-name" x="330" y="144" text-anchor="middle">Château Nord</text>
+      <text class="p4-small" x="330" y="162" text-anchor="middle">survives — E3 mentions it</text>
+
+      <!-- deleted entity: only-E1 witness -->
+      <circle class="p4-ring" cx="330" cy="252" r="32"/>
+      <path class="p4-glyph" d="M318 262 q12 -22 24 0 M322 246 h16"/>
+      <line class="p4-x" x1="306" y1="228" x2="354" y2="276"/>
+      <line class="p4-x" x1="354" y1="228" x2="306" y2="276"/>
+      <text class="p4-name" x="330" y="302" text-anchor="middle">Vallée Haute</text>
+      <text class="p4-small" x="330" y="320" text-anchor="middle">deleted — no other episode ever mentioned it</text>
+      <path class="p4-edge-dead" d="M126 248 C 180 250, 240 252, 294 252"/>
+      <text class="p4-small" x="210" y="238" text-anchor="middle">its edges die with it</text>
+    </g>
+
+    <!-- What persists -->
+    <g transform="translate(820,120)">
+      <text class="p4-zone" x="10" y="34">untouched by the removal:</text>
+      <path class="p4-edge-g" d="M20 90 H 150" marker-end="url(#mk4-gold)"/>
+      <rect class="p4-pill-g" x="40" y="60" width="92" height="28" rx="14"/>
+      <text class="p4-pilltext" x="86" y="79" text-anchor="middle">WORKS_AT</text>
+      <text class="p4-gold" x="86" y="118" text-anchor="middle">Sud · valid 2023 · open</text>
+      <path class="p4-edge-x" d="M20 190 H 150"/>
+      <rect class="p4-pill-x" x="36" y="160" width="100" height="28" rx="14"/>
+      <text class="p4-pilltext" x="86" y="179" text-anchor="middle">WORKS_WITH</text>
+      <text class="p4-grey" x="86" y="218" text-anchor="middle">Gamay · closed 2023</text>
+      <text class="p4-small" x="10" y="258">closed stamps persist even if the episode</text>
+      <text class="p4-small" x="10" y="276">that closed them is later removed —</text>
+      <text class="p4-small" x="10" y="294">deleting evidence never rewrites history</text>
+    </g>
+
+    <!-- other doors -->
+    <g transform="translate(10,600)">
+      <line x1="0" y1="0" x2="1180" y2="0" stroke="#DFD8C8" stroke-width="1.6"/>
+      <text class="p4-doors" x="0" y="30">the only other doors — all explicit: delete one node or edge · delete a whole group · clear everything · rebuild communities (wipes every Community node first)</text>
+      <text class="p4-small" x="0" y="56">nothing in ingestion ever deletes: duplicates are re-pointed, contradictions are stamped</text>
+    </g>
+  </svg>

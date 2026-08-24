@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="plate5" viewBox="0 0 1200 675" role="img" aria-label="Plate V: entity deduplication funnel — semantic candidate search, exact name match, information gate, fuzzy MinHash match, batched LLM tiebreaker">
+  <rect x="0" y="0" width="1200" height="675" fill="#F4F1EA"/>
+    <defs>
+      <marker id="mk5-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2721"/></marker>
+      <marker id="mk5-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#A9812F"/></marker>
+      <marker id="mk5-grey" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#918B7F"/></marker>
+    </defs>
+    <style>
+      .p5-card { fill: #EFEAE0; stroke: #DFD8C8; stroke-width: 1.6; }
+      .p5-tier { font-size: 13px; letter-spacing: 2px; fill: #2B2721; }
+      .p5-sub { font-size: 13px; font-style: italic; fill: #6B655A; }
+      .p5-name { font-size: 15px; fill: #2B2721; }
+      .p5-big { font-size: 17px; fill: #2B2721; }
+      .p5-gold { font-size: 13px; fill: #A9812F; }
+      .p5-grey { font-size: 13px; font-style: italic; fill: #918B7F; }
+      .p5-ringdash { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.6; stroke-dasharray: 5 5; }
+      .p5-ring { fill: #FDFCF9; stroke: #2B2721; stroke-width: 2.8; }
+      .p5-ringgold { fill: #FDFCF9; stroke: #A9812F; stroke-width: 2.8; }
+      .p5-glyph { stroke: #2B2721; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .p5-flow { stroke: #2B2721; stroke-width: 2.8; fill: none; }
+      .p5-goldline { stroke: #A9812F; stroke-width: 3; fill: none; }
+      .p5-greyline { stroke: #918B7F; stroke-width: 2.6; fill: none; stroke-dasharray: 6 6; }
+    </style>
+
+    <!-- Input -->
+    <circle class="p5-ringdash" cx="70" cy="108" r="30"/>
+    <circle class="p5-glyph" cx="70" cy="99" r="8"/><path class="p5-glyph" d="M54 121 a17 15 0 0 1 32 0"/>
+    <text class="p5-name" x="70" y="160" text-anchor="middle">"Mirra"</text>
+    <text class="p5-sub" x="70" y="180" text-anchor="middle">one extracted</text>
+    <text class="p5-sub" x="70" y="197" text-anchor="middle">name, provisional</text>
+    <line class="p5-flow" x1="104" y1="108" x2="168" y2="108" marker-end="url(#mk5-ink)"/>
+
+    <!-- Tier 1: semantic search -->
+    <rect class="p5-card" x="175" y="56" width="225" height="104" rx="8"/>
+    <text class="p5-tier" x="287" y="90" text-anchor="middle">SEMANTIC SEARCH</text>
+    <text class="p5-sub" x="287" y="114" text-anchor="middle">top 15 lookalikes by cosine</text>
+    <text class="p5-sub" x="287" y="134" text-anchor="middle">similarity ≥ 0.6, this group only</text>
+    <line class="p5-flow" x1="400" y1="108" x2="428" y2="108" marker-end="url(#mk5-ink)"/>
+    <text class="p5-grey" x="414" y="94" text-anchor="middle">found</text>
+
+    <!-- Tier 2: exact name -->
+    <rect class="p5-card" x="435" y="56" width="225" height="104" rx="8"/>
+    <text class="p5-tier" x="547" y="90" text-anchor="middle">EXACT NAME</text>
+    <text class="p5-sub" x="547" y="114" text-anchor="middle">lowercased,</text>
+    <text class="p5-sub" x="547" y="134" text-anchor="middle">spaces collapsed</text>
+    <line class="p5-flow" x1="660" y1="108" x2="688" y2="108" marker-end="url(#mk5-ink)"/>
+    <text class="p5-grey" x="674" y="94" text-anchor="middle">no hit</text>
+
+    <!-- Tier 3: information gate -->
+    <rect class="p5-card" x="695" y="56" width="225" height="104" rx="8"/>
+    <text class="p5-tier" x="807" y="90" text-anchor="middle">INFORMATION GATE</text>
+    <text class="p5-sub" x="807" y="114" text-anchor="middle">≥ 6 letters or 2 words,</text>
+    <text class="p5-sub" x="807" y="134" text-anchor="middle">Shannon entropy ≥ 1.5</text>
+    <line class="p5-flow" x1="920" y1="108" x2="948" y2="108" marker-end="url(#mk5-ink)"/>
+    <text class="p5-grey" x="934" y="94" text-anchor="middle">passed</text>
+
+    <!-- Tier 4: fuzzy match -->
+    <rect class="p5-card" x="955" y="56" width="225" height="104" rx="8"/>
+    <text class="p5-tier" x="1067" y="90" text-anchor="middle">FUZZY MATCH</text>
+    <text class="p5-sub" x="1067" y="114" text-anchor="middle">MinHash on 3-letter shingles,</text>
+    <text class="p5-sub" x="1067" y="134" text-anchor="middle">≥ 90% overlap</text>
+
+    <!-- Outcome: NEW -->
+    <line class="p5-goldline" x1="287" y1="160" x2="287" y2="288" marker-end="url(#mk5-gold)"/>
+    <text class="p5-grey" x="297" y="230">none found</text>
+    <circle class="p5-ringgold" cx="287" cy="330" r="36"/>
+    <circle class="p5-glyph" cx="287" cy="320" r="9"/><path class="p5-glyph" d="M269 347 a20 18 0 0 1 36 0"/>
+    <text class="p5-big" x="287" y="396" text-anchor="middle">NEW NODE</text>
+    <text class="p5-sub" x="287" y="416" text-anchor="middle">minted on the spot — no model consulted,</text>
+    <text class="p5-sub" x="287" y="434" text-anchor="middle">so a missed lookalike duplicates silently</text>
+
+    <!-- Outcome: REUSE -->
+    <path class="p5-goldline" d="M547 160 C 590 260, 690 315, 806 328" marker-end="url(#mk5-gold)"/>
+    <text class="p5-grey" x="560" y="248">exactly one bears the name</text>
+    <path class="p5-goldline" d="M1067 160 C 1050 250, 980 300, 892 322" marker-end="url(#mk5-gold)"/>
+    <text class="p5-grey" x="1000" y="260">confident</text>
+    <circle class="p5-ring" cx="847" cy="330" r="36"/>
+    <circle class="p5-glyph" cx="847" cy="320" r="9"/><path class="p5-glyph" d="M829 347 a20 18 0 0 1 36 0"/>
+    <text class="p5-big" x="847" y="396" text-anchor="middle">REUSE EXISTING</text>
+    <text class="p5-sub" x="847" y="416" text-anchor="middle">maps to an existing node;</text>
+    <text class="p5-sub" x="847" y="434" text-anchor="middle">new facts attach to it</text>
+
+    <!-- Grey escalations to the tiebreaker -->
+    <line class="p5-greyline" x1="475" y1="160" x2="475" y2="548" marker-end="url(#mk5-grey)"/>
+    <text class="p5-grey" x="465" y="480" text-anchor="end">two share the name</text>
+    <line class="p5-greyline" x1="735" y1="160" x2="735" y2="548" marker-end="url(#mk5-grey)"/>
+    <text class="p5-grey" x="725" y="500" text-anchor="end">too short · too plain</text>
+    <line class="p5-greyline" x1="1105" y1="160" x2="1105" y2="548" marker-end="url(#mk5-grey)"/>
+    <text class="p5-grey" x="1095" y="480" text-anchor="end">no confident match</text>
+
+    <!-- The tiebreaker strip -->
+    <rect x="10" y="556" width="1180" height="104" rx="10" fill="none" stroke="#A9812F" stroke-width="3" stroke-dasharray="10 8"/>
+    <text class="p5-big" x="40" y="600">one batched model call — the tiebreaker of last resort</text>
+    <text class="p5-sub" x="40" y="628">every leftover is ruled in a single request: mapped onto an existing node, or allowed to stand as new</text>
+  </svg>
