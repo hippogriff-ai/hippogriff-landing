@@ -1,13 +1,13 @@
 ---
 title: "Agent Memory Series: Letta Code's Git-Backed Memory Repo"
 date: "2026-08-23"
-excerpt: "Letta Code delegates memory curation to the model, and leverages Git to handle memory progression. Traced with LangSmith: what git actually gets used for."
+excerpt: "Letta Code delegates memory curation to the model: a git-backed memory folder, an in-band writer and an out-of-band dreamer to rewrite the memory. Traced with LangSmith: what git actually gets used for."
 image: "/blog/letta/d1-three-layers.png"
 ---
 
 ## TL;DR
 
-[Letta Code](https://github.com/letta-ai/letta-code) delegates memory curation to the model. It leverages Git to handle memory progression. One important assumption is that the agent has access to the shell. Git’s worktree allows different actors to make changes and the merge mechanism resolves divergence. Another benefit Git brings is that provenance and contextual info of the change is preserved in the form of merge history and commit messages.
+[Letta Code](https://github.com/letta-ai/letta-code) delegates memory curation to the model. The main agent writes it, a dreamer rewrites it (you can be a “dreamer” too: dream big and commit. Not today's topic though). Git worktrees isolate the dreamer, merges resolve divergence. The catch: shell access needed.
 
 ## Three layers of the past
 ![Three layers of the past](/blog/letta/d1-three-layers.png)
