@@ -14,7 +14,7 @@ image: "/blog/letta/d1-three-layers.png"
 *Fig 1: the three layers of the past and how the model reaches each.*
 
 1. The current context window. It is precious but has limited length.
-2. The conversation transcript, which is searchable (keyword full-text; semantic modes exist server-side) by the agent. Transcript is stored on the disk, append-only. Digging through the transcript is expensive in token cost and takes time, but it provides a good fallback when things are not in context.
+2. The conversation transcript, which is searchable (keyword full-text; vector and hybrid modes exist server-side) by the agent. Transcript is stored on the disk, append-only. Digging through the transcript is expensive in token cost and takes time, but it provides a good fallback when things are not in context.
 3. There is another layer, which is what we will focus on in this post: the model-curated memory in the form of a git-tracked folder. The model can use the path and hierarchical structure to organize the memory however it likes.
 
 
