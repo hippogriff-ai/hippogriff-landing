@@ -11,6 +11,7 @@ image: "/blog/letta/d1-three-layers.png"
 
 ## Three layers of the past
 ![Three layers of the past](/blog/letta/d1-three-layers.png)
+*Fig 1: the three layers of the past and how the model reaches each.*
 
 1. The current context window. It is precious but has limited length.
 2. The conversation transcript, which is searchable (hybrid, semantic + keyword) by the agent. Transcript is stored on the disk, append-only. Digging through the transcript is expensive in token cost and takes time, but it provides a good fallback when things are not in context.
@@ -26,7 +27,7 @@ The memory folder holds two kinds: memory blocks and external memory.
 > Memory blocks are editable segments of the system prompt. Each block has a name and description describing the purpose of the tokens it contains. Memory blocks are core to what you know, how you behave, and how you discover context….Reserve them for durable knowledge that shapes who you are and how you act, plus the indexes that let you discover everything else…Prefer compact indexes and behavioral rules over bulk content — move detail to external memory.
 
 ![Memory block captured inside an actual LLM request](/blog/letta/memory-block-screenshot.png)
-*Fig: the compiled memory block, byte-for-byte, inside a real request — not documentation, a capture.*
+*Fig 2: the compiled memory block, byte-for-byte, inside a real request. Not documentation, a capture.*
 
 **External memory.** External memory is part of the memory folder but its content does not get loaded into the system prompt. A file tree of the external memory gets loaded and exposed progressively.  Here is how the instruction looks in Letta Code’s system prompt:
 
@@ -42,8 +43,8 @@ The memory folder holds two kinds: memory blocks and external memory.
 >
 > You may also have access to shared memory: memory created independently of any single agent, designed to be dynamically attached to or detached from multiple agents. Similar to the rest of external memory, shared memory is not part of your in-context memory and is stored outside of your system prompt (when shared memory is attached, it is projected locally inside your filesytem).
 
-![External memory arrives as a file tree — names and descriptions only](/blog/letta/skills-tree-crop.png)
-*Fig: captured from a real request's system prompt — the skills tree arrives as paths plus one-line descriptions; the content stays on disk until the agent asks for it.*
+![External memory arrives as a file tree: names and descriptions only](/blog/letta/skills-tree-crop.png)
+*Fig 3: captured from a real request's system prompt. The skills tree arrives as paths plus one-line descriptions; the content stays on disk until the agent asks for it.*
 
 ## Memory lifecycle
 
@@ -88,6 +89,7 @@ In addition to compiling the `system/` content and the memory file tree into the
 ### Updating
 
 ![The memory edit pipeline](/blog/letta/d2-edit-pipeline.png)
+*Fig 4: the memory edit pipeline. Two write paths, one publish rule.*
 
 There are two agent writers of memory: the main agent and the dream agent.
 The main agent writes durable insights down as memory in-band while doing a task for the user
@@ -119,10 +121,10 @@ Some additional instructions on how memory should look:
 Before every model call, Letta Code will compare the cached memfs revision to the current HEAD's revision. If they match, then reuse the cache (0.04s walltime in the screenshot). If not, then recompile (0.41s).
 
 ![Cache hit: 0.04s, cached true, pre-merge revision](/blog/letta/integrator-resolve-cache-hit.png)
-*Fig: cache hit (0.04s), `cached: true`, revision `5feafb0…`, 19,757 chars.*
+*Fig 5: cache hit (0.04s), `cached: true`, revision `5feafb0…`, 19,757 chars.*
 
 ![Cache miss after the merge: 0.41s, cached false, new revision](/blog/letta/integrator-resolve-cache-hit-miss.png)
-*Fig: after the merge lands, the same check misses (0.41s), `cached: false`, revision `8bf0c09…` (the merge commit), prompt 58 chars heavier.*
+*Fig 6: after the merge lands, the same check misses (0.41s), `cached: false`, revision `8bf0c09…` (the merge commit), prompt 58 chars heavier.*
 
 ## The second memory writer: Dream agent
 
@@ -132,10 +134,11 @@ The dream agent is an out-of-band agent that reads the conversation transcript a
 
 **How does it work:**
 
-![Dream waterfall — reply at 3.2s, dreaming until ~50s](/blog/letta/dream-waterfall-screenshot.png)
-*Fig: Dreaming is non-blocking: user gets response at 3.2s, the rest of the pipeline runs afterward. Right pane: the dreamer's own system prompt.*
+![Dream waterfall: reply at 3.2s, dreaming until ~50s](/blog/letta/dream-waterfall-screenshot.png)
+*Fig 7: dreaming is non-blocking. The user gets the response at 3.2s; the rest of the pipeline runs afterward. Right pane: the dreamer's own system prompt.*
 
 ![How a dream ends](/blog/letta/d3-dream-outcomes.png)
+*Fig 8: how a dream ends. Only success moves the cursor.*
 
 1. Input of the dream is current memory + the transcript since the cursor. After a successful dream, the harness will advance the cursor to the last transcript row it read, so that the next dream will pick up from where the last dream ended. If a dream fails, the harness will not move the cursor.
 
@@ -166,6 +169,7 @@ Git helps with this in three areas:
 3. Commit: atomicity. Every change from either writer lands as one commit.
 
 ![The explicit merge flow](/blog/letta/d4-explicit-merge.png)
+*Fig 9: the explicit merge flow. The harness verifies git state, never the integrator's report.*
 
 There are two merge modes:
 * Merge auto, which is quite straightforward: if there's no merge conflict, go ahead. If there's a conflict, abort and discard the pending changes. A later dream will retry from scratch.
@@ -175,19 +179,19 @@ Let's run through an example of the dream finalization phase:
 
 When merge mode is explicit and the dream actually proposed something, the integrator is triggered:
 ![The integrator's entire input](/blog/letta/integrator-prompt-five-params.png)
-*Fig: the integrator's full input contract: worktree, repo, one branch by name, a pinned base commit, the dream's ID. Scope arrives as parameters; nothing is discovered.*
+*Fig 10: the integrator's full input contract: worktree, repo, one branch by name, a pinned base commit, the dream's ID. Scope arrives as parameters; nothing is discovered.*
 
 Then the proposal gets fed into the model as a git diff:
 ![The proposal arrives as a git diff](/blog/letta/integrator-round1-diff-output.png)
-*Fig: round 1 — one combined shell call; the dreamer's proposal arrives as a diff against the pinned base. Note the stat line: the whole divergence is 1 insertion, 1 deletion.*
+*Fig 11: round 1, one combined shell call. The dreamer's proposal arrives as a diff against the pinned base. Note the stat line: the whole divergence is 1 insertion, 1 deletion.*
 
 Afterwards, the merge policy kicks in.
 ![The merge policy visibly executing](/blog/letta/integrator-refine-edit.png)
-*Fig: the refine — old_string is the dreamer's run-on proposal; new_string is the integrator's rewrite under the user's 40-word merge policy.*
+*Fig 12: the refine. old_string is the dreamer's run-on proposal; new_string is the integrator's rewrite under the user's 40-word merge policy.*
 
 After the merge, the agent's prompt is recompiled.
 ![The agent's own prompt recompiles with the memory it just merged](/blog/letta/integrator-memfs-revision-flip.png)
-*Fig: after its own `git merge`, the integrator's next prompt compile picks up revision `8bf0c09` — the commit it just created.*
+*Fig 13: after its own `git merge`, the integrator's next prompt compile picks up revision `8bf0c09` (the commit it just created).*
 
 
 ## A bit more on git: provenance
@@ -201,17 +205,20 @@ The facts themselves sit in memory, so the agent knows them. But the answers to 
 
 > “A provenance question about your memory of my dinner crew: why did Ben switch from vegetarian to pescatarian, and when did that enter your memory? And how did you first learn about Tomás — I don't remember ever telling you about him in a conversation. Show me exactly how you know.”
 
-![Provenance turn — the agent delegates the archaeology](/blog/letta/provenance-waterfall.png)
+![Provenance turn: the agent delegates the archaeology](/blog/letta/provenance-waterfall.png)
+*Fig 14: the provenance turn. The agent delegates the digging to a subagent.*
 
 The agent first spawned a subagent to do the digging. The subagent started by grepping the memory folder for the two names. The matches included files inside `.git` (`.git/logs/HEAD`, `COMMIT_EDITMSG`), where commit messages sit as plain text.
-![First move: grep sweeps the memory folder and hits git's own internals](/blog/letta/provenance-grep-reflog.png)
+![Grep results include git internals](/blog/letta/provenance-grep-reflog.png)
+*Fig 15: the grep results include files inside `.git`, where commit messages sit as plain text.*
 
 Then `git log` for the full history: three authors, dated, with messages.
 ![The full three-author history in one tool output](/blog/letta/provenance-git-log.png)
+*Fig 16: the full three-author history in one tool output: my hand commits, the agent's writes, the dreamer's proposals.*
 
 The answer:
 ![The answer, with commit and diff quoted](/blog/letta/provenance-final-answer.png)
-*Fig: "I do not have evidence that you told me about Tomás in a normal conversation."*
+*Fig 17: "I do not have evidence that you told me about Tomás in a normal conversation."*
 
 ## Is Git absolutely needed?
 
@@ -220,6 +227,7 @@ Git is great, but it needs shell access to actually unleash its power. Otherwise
 Let's take a step back on how Git is actually being used here.
 
 ![Git's jobs and their shell-free replacements](/blog/letta/d5-git-replacements.png)
+*Fig 18: git's four jobs here and their shell-free replacements.*
 
 1. Git commit: atomic change
 2. git diff: rich context for divergence resolution
