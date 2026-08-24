@@ -85,6 +85,14 @@ function embedYouTubeUrls(htmlContent: string): string {
   );
 }
 
+function openLinksInNewTab(htmlContent: string): string {
+  // External links open in a new tab; relative/anchor links stay in-page.
+  return htmlContent.replace(
+    /<a href="(https?:\/\/[^"]+)"/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer"',
+  );
+}
+
 function lazyLoadImages(htmlContent: string): string {
   // Keep the first image eager (above the fold, LCP candidate); everything
   // below the fold loads lazily so opening a post doesn't download all figures.
@@ -112,6 +120,7 @@ export async function getPostBySlug(slug: string): Promise<Post & { content: str
   htmlContent = addHeadingIds(htmlContent);
   htmlContent = embedYouTubeUrls(htmlContent);
   htmlContent = lazyLoadImages(htmlContent);
+  htmlContent = openLinksInNewTab(htmlContent);
 
   return {
     slug,
