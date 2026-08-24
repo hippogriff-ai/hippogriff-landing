@@ -1,13 +1,13 @@
 ---
-title: "Memory Series Deep Dive: Letta Code's Git-Backed Memory Repo"
+title: "Agent Memory Series: Letta Code's Git-Backed Memory Repo"
 date: "2026-08-23"
-excerpt: "Letta-code delegates the model to curate the memory folder in the file system, and leverages Git to handle memory progression. Traced with LangSmith: what git actually gets used for, and what replaces it without a shell."
+excerpt: "Letta Code delegates the model to curate the memory folder in the file system, and leverages Git to handle memory progression. Traced with LangSmith: what git actually gets used for."
 image: "/blog/letta/d1-three-layers.png"
 ---
 
 ## TL;DR
 
-Letta-code delegates the model to curate the memory folder in the file system. Letta-code leverages Git to handle memory progression. One important assumption is that the agent has access to the shell. Git’s worktree allows different actors to make changes and the merge mechanism resolves the divergence. Another benefit Git brings is that provenance and contextual info of the change is preserved in the form of merge history and commit messages.
+[Letta Code](https://github.com/letta-ai/letta-code) delegates the model to curate the memory folder in the file system. Letta Code leverages Git to handle memory progression. One important assumption is that the agent has access to the shell. Git’s worktree allows different actors to make changes and the merge mechanism resolves the divergence. Another benefit Git brings is that provenance and contextual info of the change is preserved in the form of merge history and commit messages.
 
 ## Three layers of the past
 
@@ -28,7 +28,7 @@ Letta-code delegates the model to curate the memory folder in the file system. L
     ![Memory block captured inside an actual LLM request](/blog/letta/memory-block-screenshot.png)
     *Fig: the compiled memory block, byte-for-byte, inside a real request — not documentation, a capture.*
 
-    2. External memory is part of the memory folder but its content does not get loaded into the system prompt. A file tree of the external memory gets loaded and exposed progressively.  Here is how the instruction looks in letta-code’s system prompt:
+    2. External memory is part of the memory folder but its content does not get loaded into the system prompt. A file tree of the external memory gets loaded and exposed progressively.  Here is how the instruction looks in Letta Code’s system prompt:
 
 > **External memory (skills, markdown, & other files)**
 >
@@ -56,7 +56,7 @@ Memory file is in .md format, with frontmatter describing the purpose of the fil
 > **[Example — how my Friday dinner preference gets created]**
 
 ### Loading
-In addition to compiling the `system/` content and the memory file tree into the system prompt, letta-code also instructs the agent on how to use the memory:
+In addition to compiling the `system/` content and the memory file tree into the system prompt, Letta Code also instructs the agent on how to use the memory:
 
 
 > Use **memory** when the change should become part of your future judgment:
@@ -79,7 +79,7 @@ In addition to compiling the `system/` content and the memory file tree into the
 
 There are two sources of memory evolution: main agent and dream agent.
 Main agent writes the durable insights down as the memory in band while doing a task for the user
-[original system prompt link]:
+([original system prompt](https://github.com/letta-ai/letta-code/blob/main/src/agent/prompts/letta.md)):
 
 > - *System prompt learning.* … When you discover a durable insight — a corrected assumption, a user preference, a pattern in your mistakes… Updates should generalize across situations rather than simply recording individual events; the goal is to make your future self act better, not just remember more.
 
@@ -104,7 +104,7 @@ Some additional instructions on how memory should look like:
 
 ### What happens after commit
 
-Before every model call, letta-code will compare the cached memfs revision to the current HEAD's revision. If they match, then reuse the cache (0.04s walltime in screenshot). If not, then recompile (0.41s).
+Before every model call, Letta Code will compare the cached memfs revision to the current HEAD's revision. If they match, then reuse the cache (0.04s walltime in screenshot). If not, then recompile (0.41s).
 
 ![Cache hit: 0.04s, cached true, pre-merge revision](/blog/letta/integrator-resolve-cache-hit.png)
 *Fig: cache hit (0.04s), `cached: true`, revision `5feafb0…`, 19,757 chars.*
@@ -228,6 +228,6 @@ Provenance is tricky because plain file tools have no slot for the "why". Instea
 
 ## Summary
 
-Letta-code's answer to agent memory: model-driven & git-backed memory folder. It unleashes the power of the model to let it write what it thinks will help its future self, while confining every change within `git`, so each one is traceable. However it needs shell access, which makes it hard for a lot of server-side harnesses to adopt out of the box for security reasons unless sandbox is already part of the infrastructure. Good news: we can use CAS and a relational database to get similar benefits.
+Letta Code's answer to agent memory: model-driven & git-backed memory folder. It unleashes the power of the model to let it write what it thinks will help its future self, while confining every change within `git`, so each one is traceable. However it needs shell access, which makes it hard for a lot of server-side harnesses to adopt out of the box for security reasons unless sandbox is already part of the infrastructure. Good news: we can use CAS and a relational database to get similar benefits.
 
 One takeaway: Use `git` when the agent has access to shell. Use `CAS + a relational store + reinvent a way to replace commit message` when it does not.
