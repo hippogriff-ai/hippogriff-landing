@@ -1,28 +1,27 @@
 ---
 title: "Agent Memory Series: Letta Code's Git-Backed Memory Repo"
 date: "2026-08-23"
-excerpt: "Letta Code delegates the model to curate the memory folder in the file system, and leverages Git to handle memory progression. Traced with LangSmith: what git actually gets used for."
+excerpt: "Letta Code delegates memory curation to the model, and leverages Git to handle memory progression. Traced with LangSmith: what git actually gets used for."
 image: "/blog/letta/d1-three-layers.png"
 ---
 
 ## TL;DR
 
-[Letta Code](https://github.com/letta-ai/letta-code) delegates the model to curate the memory folder in the file system. Letta Code leverages Git to handle memory progression. One important assumption is that the agent has access to the shell. Git’s worktree allows different actors to make changes and the merge mechanism resolves the divergence. Another benefit Git brings is that provenance and contextual info of the change is preserved in the form of merge history and commit messages.
+[Letta Code](https://github.com/letta-ai/letta-code) delegates memory curation to the model. It leverages Git to handle memory progression. One important assumption is that the agent has access to the shell. Git’s worktree allows different actors to make changes and the merge mechanism resolves divergence. Another benefit Git brings is that provenance and contextual info of the change is preserved in the form of merge history and commit messages.
 
 ## Three layers of the past
-
 ![Three layers of the past](/blog/letta/d1-three-layers.png)
 
 1. The current context window. It is precious but has limited length.
 2. The conversation transcript, which is searchable (hybrid, semantic + keyword) by the agent. Transcript is stored on the disk, append-only. Digging through the transcript is expensive in token cost and takes time, but it provides a good fallback when things are not in context.
-3. There is another layer, which is what we will focus on in this post: the model-curated memory in the form of a git-tracked folder. Model can leverage the path and hierarchical structure to organize the memory how it likes.
+3. There is another layer, which is what we will focus on in this post: the model-curated memory in the form of a git-tracked folder. The model can use the path and hierarchical structure to organize the memory however it likes.
 
 
 ## Anatomy of memory
 
 The memory folder holds two kinds: memory blocks and external memory.
 
-**Memory blocks.** Memory block is loaded in context and it's short, condensed, high level. Here's the relevant system prompt related to it:
+**Memory blocks.** A memory block is loaded into context and it's short, condensed, high level. Here's the relevant system prompt:
 
 > Memory blocks are editable segments of the system prompt. Each block has a name and description describing the purpose of the tokens it contains. Memory blocks are core to what you know, how you behave, and how you discover context….Reserve them for durable knowledge that shapes who you are and how you act, plus the indexes that let you discover everything else…Prefer compact indexes and behavioral rules over bulk content — move detail to external memory.
 
@@ -50,14 +49,26 @@ The memory folder holds two kinds: memory blocks and external memory.
 
 ### Initialization
 
-Memory repo is initialized automatically based off a boilerplate, with a `system/` folder with default persona file and personal preference file generated. Manual triggering by `/init` is also supported, which will produce richer memory by using your project's git history to infer who you are.
+The memory repo is initialized automatically based off a boilerplate, seeded with a `system/` folder containing a default persona file and a personal preference file. Manual triggering by `/init` is also supported, which will produce richer memory by using your project's git history to infer who you are.
 
-Memory file is in .md format, with frontmatter describing the purpose of the file.
+Memory files are in .md format, with frontmatter describing the purpose of the file.
 
-> **[Example — how my Friday dinner preference gets created]**
+Here is a snippet from my agent's `system/human.md`, written by the agent in-band over several conversations:
+
+```markdown
+---
+description: What I know about Vicki
+---
+- Loves spicy and acidic flavors (chili + lime/vinegar territory)
+- Hates loud rooms — has walked out before
+- Friday dinner routine: East Village around 7:15pm; default pick is Cafe Mogador, with Kafana on Avenue C as fallback
+- Dinner crew preferences: Nora can now eat shrimp, but oysters and mussels remain off-limits
+```
+
+These lines arrived commit by commit (`Record durable Friday dining routine`, `Record dinner crew preferences`). We will meet these commits again in the provenance section.
 
 ### Loading
-In addition to compiling the `system/` content and the memory file tree into the system prompt, Letta Code also instructs the agent on how to use the memory:
+In addition to compiling the `system/` content and the memory file tree into the system prompt, Letta Code also instructs the agent on how to use its memory:
 
 
 > Use **memory** when the change should become part of your future judgment:
@@ -78,8 +89,8 @@ In addition to compiling the `system/` content and the memory file tree into the
 
 ![The memory edit pipeline](/blog/letta/d2-edit-pipeline.png)
 
-There are two sources of memory evolution: main agent and dream agent.
-Main agent writes the durable insights down as the memory in band while doing a task for the user
+There are two agent writers of memory: the main agent and the dream agent.
+The main agent writes durable insights down as memory in-band while doing a task for the user
 ([original system prompt](https://github.com/letta-ai/letta-code/blob/main/src/agent/prompts/letta.md)):
 
 > - *System prompt learning.* … When you discover a durable insight — a corrected assumption, a user preference, a pattern in your mistakes… Updates should generalize across situations rather than simply recording individual events; the goal is to make your future self act better, not just remember more.
@@ -89,14 +100,14 @@ Main agent writes the durable insights down as the memory in band while doing a 
 According to the system prompt there are two ways:
 
 1. The memory tool shorthand
-2. Direct file edits (the full control)
+2. Direct file edits (full control)
 
 > There are two ways to change memory:
 >
 > - **The `memory` tool (shorthand).** Use it for small, targeted edits. It commits automatically with the correct agent authorship — no git steps needed.
 > - **Direct file edits (full control).** For larger changes — restructuring directories, rewriting several blocks — edit the projected files directly, then commit…
 
-Some additional instructions on how memory should look like:
+Some additional instructions on how memory should look:
 > *Keep blocks lean.* Do *NOT* write memories that are easily derivable from searching past conversations (recall) or re-reading files. Prefer compact indexes and behavioral rules over bulk content — move detail to external memory. The harness flags your system prompt for `/doctor` when it grows too large.
 >
 >…
@@ -105,7 +116,7 @@ Some additional instructions on how memory should look like:
 
 ### What happens after commit
 
-Before every model call, Letta Code will compare the cached memfs revision to the current HEAD's revision. If they match, then reuse the cache (0.04s walltime in screenshot). If not, then recompile (0.41s).
+Before every model call, Letta Code will compare the cached memfs revision to the current HEAD's revision. If they match, then reuse the cache (0.04s walltime in the screenshot). If not, then recompile (0.41s).
 
 ![Cache hit: 0.04s, cached true, pre-merge revision](/blog/letta/integrator-resolve-cache-hit.png)
 *Fig: cache hit (0.04s), `cached: true`, revision `5feafb0…`, 19,757 chars.*
@@ -115,25 +126,25 @@ Before every model call, Letta Code will compare the cached memfs revision to th
 
 ## The second memory writer: Dream agent
 
-**What is dream agent**
+**What is the dream agent**
 
-Dream agent is an out-of-band agent that reads the transcript of the conversations and the existing memory to propose changes or corrections to the memory itself.
+The dream agent is an out-of-band agent that reads the conversation transcript and the existing memory to propose changes or corrections to the memory itself.
 
 **How does it work:**
 
 ![Dream waterfall — reply at 3.2s, dreaming until ~50s](/blog/letta/dream-waterfall-screenshot.png)
-*Fig: Dreaming is non-blocking: user gets response at 3.2s, the rest pipeline ran afterwards. Right pane: the dreamer's own system prompt.*
+*Fig: Dreaming is non-blocking: user gets response at 3.2s, the rest of the pipeline runs afterward. Right pane: the dreamer's own system prompt.*
 
 ![How a dream ends](/blog/letta/d3-dream-outcomes.png)
 
-1. Input of the dream is current memory + the new transcripts after the mark left by the last dreaming. After a successful dream, harness will advance the cursor to the last transcript row, so that the next dream will pick up from where the last dream ended. If a dream fails, harness will not move the cursor.
+1. Input of the dream is current memory + the transcript since the cursor. After a successful dream, the harness will advance the cursor to the last transcript row it read, so that the next dream will pick up from where the last dream ended. If a dream fails, the harness will not move the cursor.
 
 2. When does the dreaming happen? The dream can be fired in different ways:
     * Step-count threshold (the default).
-    * Upon the compaction, which is a logically good pause point to really reflect and modify the memory.
+    * Upon compaction, which is a logically good pause point to really reflect and modify the memory.
     * It could also be triggered explicitly by the user.
 
-3. What if there's a conflict? Here is the magic of Git again. Dream Agent will leverage the worktree to work on a copy of the memory. Once it's done, the harness will try to `git merge` into the parent branch. More on the merging mechanism in the following section.
+3. What if there's a conflict? Here is the magic of Git again. The dream agent uses a worktree to work on a copy of the memory. Once it's done, the harness will try to `git merge` into the parent branch. More on the merging mechanism in the following section.
 
 
 **What can dream agent change:**
@@ -146,35 +157,35 @@ According to the system prompt:
 ## Git in memory curation
 Now the highlight: Git.
 
-Starts with why: Memory has two writers: main agent (in-band) and dream agent (out of band). It needs a mechanism to prevent two writers from interfering with each other.
+Start with why: Memory has two writers: main agent (in-band) and dream agent (out of band). It needs a mechanism to prevent two writers from interfering with each other.
 
 Git helps with this in three areas:
 
-1. Worktree: isolation. The dream agent gets its own branch. Main agent keeps writing while dream agent does the work.
-2. Merge: reconciliation. Dream agent's proposal comes back via merging. If the parent HEAD moved (because of main agent's editing), conflicts get resolved before the merge lands. Details in the next part.
+1. Worktree: isolation. The dream agent gets its own branch. The main agent keeps writing while the dream agent does the work.
+2. Merge: reconciliation. Dream agent's proposal comes back via merging. If the parent HEAD moved (because of the main agent's edits), conflicts get handled before the merge lands. Details in the next part.
 3. Commit: atomicity. Every change from either writer lands as one commit.
 
 ![The explicit merge flow](/blog/letta/d4-explicit-merge.png)
 
 There are two merge modes:
-* Merge auto, which is quite straightforward: if there's no merge conflict, go ahead. If there's a conflict, abort and discard the pending changes. The later dream will retry from scratch.
-* Merge explicit, which will require a spawn of the main agent to resolve the conflicts. It starts by merging the current HEAD of parent branch into working branch if the parent moved, then reason through the difference and try to merge the branch back to parent.
+* Merge auto, which is quite straightforward: if there's no merge conflict, go ahead. If there's a conflict, abort and discard the pending changes. A later dream will retry from scratch.
+* Merge explicit, which will require a spawn of the main agent to resolve the conflicts. It starts by merging the current HEAD of the parent branch into the working branch if the parent moved, then reasons through the difference and tries to merge the branch back into the parent.
 
 Let's run through an example of the dream finalization phase:
 
-When merge mode is explicit and dream actually proposed something, integrator will be triggered:
+When merge mode is explicit and the dream actually proposed something, the integrator is triggered:
 ![The integrator's entire input](/blog/letta/integrator-prompt-five-params.png)
 *Fig: the integrator's full input contract: worktree, repo, one branch by name, a pinned base commit, the dream's ID. Scope arrives as parameters; nothing is discovered.*
 
-Then the proposal gets fed into the model as git diff:
+Then the proposal gets fed into the model as a git diff:
 ![The proposal arrives as a git diff](/blog/letta/integrator-round1-diff-output.png)
 *Fig: round 1 — one combined shell call; the dreamer's proposal arrives as a diff against the pinned base. Note the stat line: the whole divergence is 1 insertion, 1 deletion.*
 
-Afterwards, merge policy kicked in.
+Afterwards, the merge policy kicks in.
 ![The merge policy visibly executing](/blog/letta/integrator-refine-edit.png)
 *Fig: the refine — old_string is the dreamer's run-on proposal; new_string is the integrator's rewrite under the user's 40-word merge policy.*
 
-After memory merge was done, agent's prompt gets recompiled.
+After the merge, the agent's prompt is recompiled.
 ![The agent's own prompt recompiles with the memory it just merged](/blog/letta/integrator-memfs-revision-flip.png)
 *Fig: after its own `git merge`, the integrator's next prompt compile picks up revision `8bf0c09` — the commit it just created.*
 
@@ -204,9 +215,9 @@ The answer:
 
 ## Is Git absolutely needed?
 
-Git is great, but it needs shell access to actually unleash the power, otherwise mimicking a git-like surface sounds like a heavy lift and error prone.
+Git is great, but it needs shell access to actually unleash its power. Otherwise, mimicking a git-like surface sounds heavy and error-prone.
 
-Let's take a step back on how Git is actually being used in here.
+Let's take a step back on how Git is actually being used here.
 
 ![Git's jobs and their shell-free replacements](/blog/letta/d5-git-replacements.png)
 
@@ -217,18 +228,18 @@ Let's take a step back on how Git is actually being used in here.
 
 Here I listed diff and log as separate rows, because I observed `git diff` alone in conflict resolution. Git history came up only for provenance questions (please correct me if this view is too limited).
 
-Ok, so can we find an alternative achieving the similar goals?
+Ok, so can we find an alternative achieving similar goals?
 
 1. Atomic change: a DB that supports transactions can get this covered
 2. Divergence: Retain the versions themselves by using content SHA, and any two can be diffed.
 3. Provenance: the tricky one. Discussion below.
-4. Uncommitted change check: compare and swap and content SHA comparison.
+4. Uncommitted change check: compare-and-swap (CAS) and content SHA comparison.
 
 Provenance is tricky because plain file tools have no slot for the "why". Instead of building a custom tool to record the reason, we can lean on implicit linkage: record a session ID and message ID with each write. The why then lives in the transcript those IDs point to. Less direct than a commit message. Conceptually it works.
 
 
 ## Summary
 
-Letta Code's answer to agent memory: model-driven & git-backed memory folder. It unleashes the power of the model to let it write what it thinks will help its future self, while confining every change within `git`, so each one is traceable. However it needs shell access, which makes it hard for a lot of server-side harnesses to adopt out of the box for security reasons unless sandbox is already part of the infrastructure. Good news: we can use CAS and a relational database to get similar benefits.
+Letta Code's answer to agent memory: model-driven & git-backed memory folder. It unleashes the power of the model to let it write what it thinks will help its future self, while confining every change within `git`, so each one is traceable. However it needs shell access, which makes it hard for a lot of server-side harnesses to adopt out of the box for security reasons unless a sandbox is already part of the infrastructure. Good news: we can use CAS and a relational database to get similar benefits.
 
-One takeaway: Use `git` when the agent has access to shell. Use `CAS + a relational store + reinvent a way to replace commit message` when it does not.
+One takeaway: Use `git` when the agent has shell access. Use `CAS + a relational store + a replacement for the commit message` when it does not.
