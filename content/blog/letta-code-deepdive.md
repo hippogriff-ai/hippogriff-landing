@@ -229,7 +229,7 @@ Let's take a step back on how Git is actually being used here.
 ![Git's jobs and their shell-free replacements](/blog/letta/d5-git-replacements.png)
 *Fig 18: git's four jobs here and their shell-free replacements.*
 
-1. Git commit: atomic change
+1. git commit: atomic change
 2. git diff: rich context for divergence resolution
 3. git log: provenance
 4. git status --porcelain: short-circuit when the memory repo has uncommitted changes
