@@ -11,6 +11,7 @@ Vicki Zhang is a senior full stack software engineer building agents at work and
 ## Blog
 Posts on software engineering, AI, agents, and building things. Feed: https://www.hippogriff.io/feed.xml
 
+- Agent Memory Series: Letta Code's Git-Backed Memory Repo: How Letta Code memory works, traced with LangSmith. The model curates a git-backed memory folder; worktrees isolate the dream agent, merges reconcile divergence, and commit history carries provenance. Plus what replaces git (CAS and a relational store) when the agent has no shell. https://www.hippogriff.io/blog/letta-code-deepdive
 - Agent Memory Series: Graphiti - A graph that tells time: How Graphiti works — bi-temporal fact edges carrying a world clock and a system clock, an engineered update policy that settles contradictions by world dates and invalidates instead of overwriting, and the gaps that remain for enterprise use. https://www.hippogriff.io/blog/graphiti-deepdive
 - Agent Memory Series: Mem0 Deepdive: How Mem0 v3 works — LLM-extracted flat, add-only facts, semantic search boosted by BM25 keyword and entity matching, and the open questions it leaves for enterprise use. https://www.hippogriff.io/blog/mem0-deepdive
 - Reading Anthropic's Memory API: Best-guess design analysis of the Memory API — per-file linearizability via compare-and-swap, file-based memory as a distributed primitive. https://www.hippogriff.io/blog/reading-anthropics-memory-api
