@@ -85,6 +85,19 @@ function embedYouTubeUrls(htmlContent: string): string {
   );
 }
 
+function lazyLoadImages(htmlContent: string): string {
+  // Keep the first image eager (above the fold, LCP candidate); everything
+  // below the fold loads lazily so opening a post doesn't download all figures.
+  let first = true;
+  return htmlContent.replace(/<img /g, () => {
+    if (first) {
+      first = false;
+      return '<img ';
+    }
+    return '<img loading="lazy" decoding="async" ';
+  });
+}
+
 export async function getPostBySlug(slug: string): Promise<Post & { content: string }> {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -98,6 +111,7 @@ export async function getPostBySlug(slug: string): Promise<Post & { content: str
   let htmlContent = processed.toString();
   htmlContent = addHeadingIds(htmlContent);
   htmlContent = embedYouTubeUrls(htmlContent);
+  htmlContent = lazyLoadImages(htmlContent);
 
   return {
     slug,
