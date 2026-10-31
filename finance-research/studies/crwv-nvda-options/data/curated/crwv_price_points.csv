@@ -1,0 +1,43 @@
+date,price,basis,note,source
+2025-03-28,40.0,close,"IPO day close, flat to $40 IPO price",https://www.reuters.com/ (IPO coverage); https://stockanalysis.com/stocks/crwv/history/
+2025-03-31,35.93,derived,month-end chain; StockScan lists 2025 start price 37.08,https://stockscan.io/stocks/CRWV/price-history
+2025-04-21,33.52,intraday_low,all-time low,https://stockscan.io/stocks/CRWV/price-history
+2025-04-30,40.02,derived,month-end chain from StockScan monthly % changes anchored on 71.61 (2025-12-31),https://stockscan.io/stocks/CRWV/price-history
+2025-05-30,107.85,derived,month-end chain (May +169.5%),https://stockscan.io/stocks/CRWV/price-history
+2025-06-20,183.58,close,all-time high close (intraday ~187),https://www.macrotrends.net/stocks/charts/CRWV/coreweave/stock-price-history
+2025-06-30,158.0,derived,month-end chain (Jun +46.5%),https://stockscan.io/stocks/CRWV/price-history
+2025-07-31,110.58,derived,month-end chain (Jul -30.0%),https://stockscan.io/stocks/CRWV/price-history
+2025-08-12,148.75,close,close before Q2 2025 report,https://www.cnbc.com/2025/08/13/coreweave-crwv-q2-earnings-report-2025.html
+2025-08-13,117.77,derived,148.75 x (1-0.2083),https://www.tipranks.com/
+2025-08-29,99.83,derived,month-end chain (Aug -9.7%),https://stockscan.io/stocks/CRWV/price-history
+2025-09-30,132.59,derived,month-end chain (Sep +32.8%),https://stockscan.io/stocks/CRWV/price-history
+2025-10-30,131.0,approx_close,~$131 after Core Scientific vote (-6%),https://www.bloomberg.com/news/articles/2025-10-30/core-scientific-investors-spurn-coreweave-takeover-bid-in-vote
+2025-10-31,129.55,derived,month-end chain (Oct -2.3%); 52-week high 138.36 printed Oct 31 2025,https://stockscan.io/stocks/CRWV/price-history
+2025-11-10,105.61,close,close before Q3 2025 report,https://www.cnbc.com/2025/11/10/coreweave-crwv-q3-earnings-report-2025.html
+2025-11-11,88.38,derived,105.61 x (1-0.1631),https://www.tipranks.com/
+2025-11-28,70.85,derived,month-end chain (Nov -45.3%),https://stockscan.io/stocks/CRWV/price-history
+2025-12-31,71.61,close,year-end close (MarketBeat 'Jan 1 2026' price; Fool period table),https://www.marketbeat.com/stocks/NASDAQ/CRWV/; https://www.fool.com/quote/nasdaq/crwv/
+2026-01-26,87.2,approx_close,Nvidia $2B investment priced at 87.20; stock +6% that day,https://www.sec.gov/Archives/edgar/data/1769628/
+2026-01-30,93.19,close_unverified,"Digrin monthly table Jan 2026 (table's Feb value 79.56 matches Feb 27 close, so likely month-end)",https://www.digrin.com/stocks/detail/CRWV/price
+2026-02-26,97.63,close,close before Q4 2025 report,https://www.fool.com/
+2026-02-27,79.56,close,-18.5% reaction day,https://www.fool.com/; https://www.tipranks.com/
+2026-03-26,81.01,close,Robinhood quote,https://robinhood.com/us/en/stocks/CRWV
+2026-03-31,83.77,derived,133.20 on Apr 27 / 1.59 (reported +59% MTD in April),https://www.tikr.com/blog/coreweave-nasdaq-crwv-stock-climbs-after-securing-21-billion-ai-infrastructure-deal-with-meta
+2026-04-27,133.2,close,Cantor PT note reference close,mirror pages of 2026-04-27 analysis (low reliability)
+2026-05-07,128.9,derived,CNBC: +~80% YTD at May 7 close (71.61 x 1.8); Magnetar sold at 129-133 that day,https://www.cnbc.com/2026/05/07/coreweave-crwv-q1-earnings-report-2026.html
+2026-05-08,114.2,derived,128.9 x (1-0.114),https://www.tipranks.com/
+2026-06-30,87.0,derived_low_confidence,Yahoo market cap $54.31B at 6/30/26 over ~620-645M shares => ~84-88,https://finance.yahoo.com/quote/CRWV/key-statistics/
+2026-07-31,71.77,close,StockScan: latest close as of Jul 31 2026 (July -27.9%),https://stockscan.io/stocks/CRWV/price-history
+2026-08-11,89.0,approx_close,close before Q2 2026 report (~$89; 13.21% implied = $11.65),https://www.tipranks.com/
+2026-08-12,106.2,derived,89 x 1.193,https://earnings-watcher.com/wiki/crwv-earnings-options
+2026-08-14,105.26,close,+46.7% MTD at Aug 14,https://stock.10jqka.com.cn/20260815/c678978956.shtml
+2026-09-03,84.56,close,Twelve Data daily table,https://twelvedata.com/markets/180244/stock/nasdaq/crwv/historical-data
+2026-09-30,87.12,close,StockAnalysis / TradingView,https://stockanalysis.com/stocks/crwv/history/
+2026-10-06,91.9,derived,Bloomberg: -41% from Oct 6 to Oct 23 close 54.24,https://www.bloomberg.com/news/articles/2026-10-26/coreweave-rout-sends-warning-sign-to-rest-of-the-stock-market
+2026-10-14,65.78,close,below both convertible conversion prices,crwv_events.csv
+2026-10-20,62.13,close,StockAnalysis daily table,https://stockanalysis.com/stocks/crwv/history/
+2026-10-23,54.24,close,-37.75% from Sep 30,https://www.bloomberg.com/
+2026-10-26,51.24,intraday_low,52-week low,https://www.cnbc.com/quotes/CRWV
+2026-10-27,59.57,close,earnings-date announcement day,https://stockhouse.com/
+2026-10-29,60.74,close,Macrotrends / StockAnalysis,https://www.macrotrends.net/stocks/charts/CRWV/coreweave/stock-price-history
+2026-10-30,54.87,close,-9.66% (Investing.com); GuruFocus prints 54.60,https://www.investing.com/equities/coreweave

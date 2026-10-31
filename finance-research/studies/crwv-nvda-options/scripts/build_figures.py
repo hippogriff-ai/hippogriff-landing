@@ -41,19 +41,31 @@ def num(s: pd.Series) -> pd.Series:
     return pd.to_numeric(s.astype(str).str.replace("%", "").str.replace("$", "").str.replace(",", ""), errors="coerce")
 
 
+def crwv_points() -> pd.DataFrame | None:
+    c = load("crwv_price_points.csv")
+    if c is None:
+        return None
+    c = c[~c["basis"].astype(str).str.contains("intraday")].copy()
+    c["month_end"] = pd.to_datetime(c["date"]); c["close"] = num(c["price"])
+    c["derived"] = c["basis"].astype(str).str.contains("derived|unverified|approx")
+    return c.dropna(subset=["close"]).sort_values("month_end")
+
+
 def fig_price_paths():
-    n, c = load("nvda_monthly_close.csv"), load("crwv_monthly_close.csv")
+    n, c = load("nvda_monthly_close.csv"), crwv_points()
     if n is None or c is None:
         return
-    n["month_end"] = pd.to_datetime(n["month_end"]); c["month_end"] = pd.to_datetime(c["month_end"])
-    n["close"], c["close"] = num(n["close"]), num(c["close"])
-    n, c = n.dropna(subset=["close"]).sort_values("month_end"), c.dropna(subset=["close"]).sort_values("month_end")
+    n["month_end"] = pd.to_datetime(n["month_end"])
+    n["close"] = num(n["close"])
+    n = n.dropna(subset=["close"]).sort_values("month_end")
     fig, ax = plt.subplots(figsize=(9, 4.2))
     ax.plot(n["month_end"], n["close"], color=C_NVDA, lw=2, label="NVDA (left axis)")
     ax.set_ylabel("NVDA close ($)")
     ax2 = ax.twinx(); ax2.grid(False)
-    ax2.plot(c["month_end"], c["close"], color=C_CRWV, lw=2, label="CRWV (right axis)")
-    ax2.set_ylabel("CRWV close ($)")
+    ax2.plot(c["month_end"], c["close"], color=C_CRWV, lw=2, label="CRWV (right axis; dated points, see crwv_price_points.csv)")
+    der = c[c["derived"]]
+    ax2.scatter(der["month_end"], der["close"], color="white", edgecolor=C_CRWV, s=18, zorder=4, label="CRWV derived point")
+    ax2.set_ylabel("CRWV price ($)")
     ev = load("catalysts.csv")
     if ev is not None:
         ev["date"] = pd.to_datetime(ev["date"], errors="coerce")
@@ -61,7 +73,7 @@ def fig_price_paths():
             ax.axvline(r["date"], color=C_GREY, lw=0.6, alpha=0.5)
     h1, l1 = ax.get_legend_handles_labels(); h2, l2 = ax2.get_legend_handles_labels()
     ax.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False)
-    ax.set_title("Month-end closes; grey lines = catalysts in catalysts.csv")
+    ax.set_title("NVDA month-end closes and CRWV dated price points; grey lines = catalysts in catalysts.csv")
     fig.tight_layout(); fig.savefig(FIG / "01_price_paths.png"); plt.close(fig)
     print("[ok] 01_price_paths.png")
 
@@ -82,30 +94,42 @@ def _implied_vs_actual(df: pd.DataFrame, label_col: str, color: str, title: str,
     for i, (a, b) in enumerate(zip(d["imp"], d["act"])):
         ax.text(i + 0.2, abs(b) + 0.2, f"{b:+.1f}%", ha="center", fontsize=8)
     ax.set_xticks(x); ax.set_xticklabels(d[label_col], rotation=0, fontsize=8)
-    ax.set_ylabel("% move"); ax.set_title(title); ax.legend(frameon=False)
+    ax.set_ylabel("% move"); ax.set_title(title); ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=2)
     fig.tight_layout(); fig.savefig(FIG / fname); plt.close(fig)
     print(f"[ok] {fname}")
 
 
+def load_table(name: str) -> pd.DataFrame | None:
+    """Clean numeric tables written by scripts/analyze_curated.py (first-number parsing of the curated cells)."""
+    p = ROOT / "report" / name
+    if not p.exists():
+        print(f"[skip] {name} not found (run scripts/analyze_curated.py first)"); return None
+    df = pd.read_csv(p)
+    return df.rename(columns={"implied_%": "options_implied_move_pct", "actual_%": "one_day_move_pct",
+                              "rev_beat_%": "revenue_beat_pct", "guide_vs_cons_%": "guidance_vs_consensus_pct"})
+
+
 def fig_implied_vs_actual():
-    n = load("nvda_earnings.csv")
+    n = load_table("nvda_earnings_table.csv")
     if n is not None:
-        _implied_vs_actual(n, "fiscal_quarter", C_NVDA, "NVDA: options-implied vs actual earnings move", "02_nvda_implied_vs_actual.png")
-    c = load("crwv_earnings.csv")
+        n["label"] = n["quarter"].str.replace("FY20", "FY") + "\n" + n["report"].str[:7]
+        _implied_vs_actual(n, "label", C_NVDA, "NVDA: options-implied vs actual next-day earnings move (8 reports)", "02_nvda_implied_vs_actual.png")
+    c = load_table("crwv_earnings_table.csv")
     if c is not None:
-        _implied_vs_actual(c, "quarter", C_CRWV, "CRWV: options-implied vs actual earnings move", "03_crwv_implied_vs_actual.png")
+        c["label"] = c["quarter"] + "\n" + c["report"].str[:7]
+        _implied_vs_actual(c, "label", C_CRWV, "CRWV: options-implied vs actual next-day earnings move (6 reports)", "03_crwv_implied_vs_actual.png")
 
 
 def fig_beat_vs_reaction():
     rows = []
-    for name, lab, col in [("nvda_earnings.csv", "NVDA", C_NVDA), ("crwv_earnings.csv", "CRWV", C_CRWV)]:
-        df = load(name)
+    for name, lab, col in [("nvda_earnings_table.csv", "NVDA", C_NVDA), ("crwv_earnings_table.csv", "CRWV", C_CRWV)]:
+        df = load_table(name)
         if df is None:
             continue
-        beat = num(df["revenue_beat_pct"]) if "revenue_beat_pct" in df else num(df.get("beat_pct", pd.Series(dtype=float)))
-        guide = num(df["guidance_vs_consensus_pct"]) if "guidance_vs_consensus_pct" in df else pd.Series(np.nan, index=df.index)
-        react = num(df["one_day_move_pct"])
-        for b, g, r, q in zip(beat, guide, react, df.iloc[:, 1]):
+        beat = df["revenue_beat_pct"]
+        guide = df["guidance_vs_consensus_pct"] if "guidance_vs_consensus_pct" in df else pd.Series(np.nan, index=df.index)
+        react = df["one_day_move_pct"]
+        for b, g, r, q in zip(beat, guide, react, df["report"].str[:7]):
             rows.append((lab, col, b, g, r, q))
     d = pd.DataFrame(rows, columns=["tk", "color", "beat", "guide", "react", "q"]).dropna(subset=["beat", "react"])
     if d.empty:
@@ -140,9 +164,8 @@ def fig_hn_attention():
         bottom += counts[col].values
     ax.set_title("Hacker News front-page stories found per month (curated sample, not a census)")
     ax.set_ylabel("stories"); ax.legend(frameon=False)
-    c = load("crwv_monthly_close.csv")
+    c = crwv_points()
     if c is not None:
-        c["month_end"] = pd.to_datetime(c["month_end"]); c["close"] = num(c["close"])
         ax2 = ax.twinx(); ax2.grid(False)
         ax2.plot(c["month_end"], c["close"], color=C_CRWV, lw=1.5, ls="--", label="CRWV close")
         ax2.set_ylabel("CRWV close ($)")
@@ -151,47 +174,46 @@ def fig_hn_attention():
 
 
 def fig_capex():
-    m = load("macro_signals.csv")
-    if m is None:
+    cap = load("hyperscaler_capex_guidance.csv")
+    if cap is None:
         return
-    cap = m[m["category"].astype(str).str.lower() == "capex"].copy()
-    cap["date"] = pd.to_datetime(cap["date"], errors="coerce")
-    cap["val"] = num(cap["value"])
-    cap = cap.dropna(subset=["date", "val"])
-    if cap.empty:
-        print("[skip] 06_capex: no numeric capex rows"); return
+    cap["date"] = pd.to_datetime(cap["date"], errors="coerce"); cap["val"] = num(cap["midpoint_busd"])
+    cap = cap.dropna(subset=["date", "val"]).sort_values("date")
     fig, ax = plt.subplots(figsize=(9, 4.2))
-    ax.scatter(cap["date"], cap["val"], color=C_ACCENT, s=30)
-    for _, r in cap.iterrows():
-        ax.annotate(str(r["event"])[:40], (r["date"], r["val"]), fontsize=6, xytext=(3, 3), textcoords="offset points")
-    ax.set_title("Hyperscaler capex guidance announcements ($B) — the demand signal upstream of NVDA and CRWV")
-    ax.set_ylabel("$B")
+    cols = {"MSFT": C_ACCENT, "GOOGL": C_NVDA, "AMZN": "#B8860B", "META": "#7B2CBF"}
+    for co, g in cap.groupby("company"):
+        ax.step(g["date"], g["val"], where="post", color=cols.get(co, C_GREY), lw=1.8, label=co)
+        ax.scatter(g["date"], g["val"], color=cols.get(co, C_GREY), s=22, zorder=3)
+    for d, lab in [("2025-01-27", "DeepSeek"), ("2025-04-15", "H20 ban"), ("2025-11-10", "CRWV guide cut"), ("2026-10-28", "MSFT trims")]:
+        ax.axvline(pd.Timestamp(d), color=C_GREY, lw=0.7, ls="--"); ax.text(pd.Timestamp(d), ax.get_ylim()[1] * 0.98 if ax.get_ylim()[1] > 0 else 200, lab, fontsize=7, rotation=90, va="top", color=C_GREY)
+    ax.set_title("Hyperscaler full-year capex guidance (midpoint, $B) as announced; 2025 guides left, 2026 guides right")
+    ax.set_ylabel("$B"); ax.legend(frameon=False, ncol=4)
     fig.tight_layout(); fig.savefig(FIG / "06_capex_signals.png"); plt.close(fig)
     print("[ok] 06_capex_signals.png")
 
 
 def fig_crwv_events():
     ev = load("crwv_events.csv")
-    c = load("crwv_monthly_close.csv")
+    c = crwv_points()
     if ev is None or c is None:
         return
-    ev["date"] = pd.to_datetime(ev["date"], errors="coerce"); ev["mv"] = num(ev["stock_move_pct"])
+    ev["date"] = pd.to_datetime(ev["date"].astype(str).str[:10], errors="coerce"); ev["mv"] = num(ev["stock_move_pct"])
     ev = ev.dropna(subset=["date"])
-    c["month_end"] = pd.to_datetime(c["month_end"]); c["close"] = num(c["close"])
     fig, ax = plt.subplots(figsize=(10, 4.5))
     ax.plot(c["month_end"], c["close"], color=C_CRWV, lw=2)
     cats = ev["category"].astype(str).str.lower()
     palette = {"ipo": C_ACCENT, "contract": C_NVDA, "debt": "#B8860B", "lockup": C_NEG, "mna": "#7B2CBF",
                "analyst": C_GREY, "guidance": C_NEG, "insider": "#555555", "other": C_GREY}
-    ymax = c["close"].max()
+    import matplotlib.dates as mdates
+    xs = mdates.date2num(c["month_end"].dt.to_pydatetime())
     for (_, r), cat in zip(ev.iterrows(), cats):
-        y = np.interp(r["date"].value, c["month_end"].astype("int64"), c["close"]) if len(c) else ymax
-        ax.scatter(r["date"], y, color=palette.get(cat, C_GREY), s=28, zorder=3)
+        y = float(np.interp(mdates.date2num(r["date"].to_pydatetime()), xs, c["close"].to_numpy(dtype=float)))
+        ax.scatter(r["date"], y, color=palette.get(cat, C_GREY), s=34, zorder=3, edgecolor="white", linewidth=0.6)
     for cat, col in palette.items():
         if (cats == cat).any():
             ax.scatter([], [], color=col, label=cat)
     ax.legend(frameon=False, ncol=4, fontsize=8); ax.set_ylabel("CRWV close ($)")
-    ax.set_title("CRWV corporate events on the (monthly) price path")
+    ax.set_title("CRWV corporate events on the price path (dated points; derived points interpolated)")
     fig.tight_layout(); fig.savefig(FIG / "07_crwv_events.png"); plt.close(fig)
     print("[ok] 07_crwv_events.png")
 

@@ -1,0 +1,25 @@
+date,company,guidance,midpoint_busd,confidence,source
+2025-01-03,MSFT,FY2025 ~80 (blog),80.0,confirmed,https://blogs.microsoft.com/
+2025-01-29,META,2025: 60-65,62.5,confirmed (midpoint 62.5 cited in April raise coverage),https://amritaroy.substack.com/p/q1-update-hyperscalers-had-a-goldilocks
+2025-02-04,GOOGL,2025: ~75,75.0,confirmed (first of three raises to 91-93),https://www.trendforce.com/news/2025/10/30/
+2025-02-06,AMZN,2025: ~100,100.0,memory; later steps 118 and 125 confirmed,https://www.futuriom.com/articles/news/are-hyperscalers-spending-too-much-on-datacenters/2025/08
+2025-04-30,META,2025 raised: 64-72,68.0,confirmed,https://amritaroy.substack.com/p/q1-update-hyperscalers-had-a-goldilocks
+2025-07-23,GOOGL,2025 raised: ~85,85.0,confirmed,https://www.trendforce.com/news/2025/10/30/
+2025-07-30,META,2025 narrowed: 66-72; 2026 'similarly significant' growth,69.0,confirmed (one source),https://www.futuriom.com/
+2025-07-31,AMZN,2025: ~118,118.0,confirmed,https://www.futuriom.com/
+2025-10-29,META,2025 raised: 70-72; 2026 'notably larger',71.0,confirmed,https://www.trendforce.com/news/2025/10/30/
+2025-10-29,GOOGL,2025 raised: 91-93,92.0,confirmed,https://www.trendforce.com/news/2025/10/30/
+2025-10-30,AMZN,2025: ~125; higher in 2026,125.0,confirmed,https://www.trendforce.com/news/2025/10/30/
+2026-01-28,META,2026: 115-135,125.0,confirmed,https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion
+2026-02-04,GOOGL,2026: 175-185,180.0,confirmed,https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion
+2026-02-05,AMZN,2026: ~200,200.0,confirmed,https://sherwood.news/tech/alphabet-amazon-microsoft-meta-plan-more-than-700-billion-on-capex-this-year/
+2026-04-29,META,2026 raised: 125-145 (component costs),135.0,confirmed,https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion
+2026-04-29,MSFT,CY2026: ~190 (incl. ~25 memory-chip costs),190.0,confirmed,https://tomshardware.com/tech-industry/big-tech/microsoft-attributed-25-billion-of-its-record-ai-budget-to-memory-chip-costs
+2026-04-30,GOOGL,2026 raised: 180-190; 2027 'significantly' higher,185.0,confirmed,https://www.tomshardware.com/tech-industry/big-tech/big-techs-ai-spending-plans-reach-725-billion
+2026-04-30,AMZN,2026: ~200 unchanged,200.0,confirmed,https://sherwood.news/
+2026-07-29,META,2026 raised again (figure NA); EPS miss; stock -9.6%,,"confirmed headline, figure NA",https://www.tradingkey.com/analysis/stocks/us-stocks/262063667-meta-stock-crashing-after-q2-2026-earnings-eps-miss-capex-tradingkey
+2026-07-28,GOOGL,Q2 report 'panned'; capex scrutiny rises (range later held at 195-205),200.0,confirmed (level from Oct hold),https://www.cnbc.com/2026/07/28/hyperscalers-face-higher-capex-scrutiny-after-alphabet-report-panned.html
+2026-10-21,META,2026 narrowed: 135-145; no 2027 guide; S&P outlook negative,140.0,confirmed,https://www.cnbc.com/2026/10/21/meta-earnings-q3-2026-live-updates.html
+2026-10-28,MSFT,forecast trimmed to ~170 from ~175; third-party chip delays push capacity to 1H27,170.0,confirmed,https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html
+2026-10-28,GOOGL,2026 held: 195-205 (not raised),200.0,confirmed,https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html
+2026-10-29,AMZN,"2026: ~220; 'meaningfully more' in 2027; EPS miss, FCF negative",220.0,confirmed,https://fortune.com/2026/10/29/amazon-shares-sink-as-spending-on-ai-overshadows-growth-in-cloud-unit
