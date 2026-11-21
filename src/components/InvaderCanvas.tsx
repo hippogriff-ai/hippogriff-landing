@@ -96,6 +96,16 @@ export default function InvaderCanvas() {
     // Mobile: reduce spawn rate
     const spawnRate = w < 400 ? 2000 : 1200;
 
+    // Start mid-rain instead of from an empty card: seed roughly as many
+    // invaders as are on screen once the rain is steady, spread over the height.
+    const AVG_SPEED_PX_PER_SEC = 0.32 * 60;
+    const seedCount = Math.round((h / AVG_SPEED_PX_PER_SEC) / (spawnRate / 1000));
+    for (let i = 0; i < seedCount; i++) {
+      const inv = new MiniInvader(w, h);
+      inv.y = ((i + Math.random()) / seedCount) * h;
+      invaders.push(inv);
+    }
+
     function animate(now: number) {
       ctx!.clearRect(0, 0, w, h);
 
