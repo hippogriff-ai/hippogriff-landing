@@ -235,7 +235,9 @@ main {
 }
 
 .project-card-cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 20px;
   border: 1px solid var(--accent);
   text-decoration: none;
