@@ -5,7 +5,7 @@ Vicki Zhang is a senior full stack software engineer building agents at work and
 
 ## Projects
 - TypeCraft: A Space Invaders typing game that showcases how a small, well-crafted app can make a routine task more fun. https://typecraft.hippogriff.io
-- Talent Promo: Resume writing agent that discovers your hidden strengths. https://talent-promo.hippogriff.io
+- Talent Promo: Resume writing agent that discovers your hidden strengths. https://github.com/hippogriff-ai/talent-promo
 - Remo: LiDAR-powered iOS room redesign agent — photograph a room, chat with an AI design consultant, get photorealistic redesigns and a shoppable product list. https://github.com/hippogriff-ai/remo
 
 ## Blog

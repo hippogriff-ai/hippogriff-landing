@@ -35,10 +35,10 @@ const PROJECTS = [
   {
     name: 'Talent Promo',
     desc: 'Resume writing agent that discovers your hidden strengths',
-    url: 'https://talent-promo.hippogriff.io',
+    url: 'https://github.com/hippogriff-ai/talent-promo',
     hasAnimation: false,
     image: '/talent-promo.png',
-    cta: 'Try',
+    cta: 'View',
   },
 ];
 
