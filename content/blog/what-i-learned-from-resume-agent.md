@@ -9,7 +9,7 @@ I always feel defeated when revising my resume. The mixed feeling of "I have so 
 
 About a year ago, two other friends and I tried to build a resume agent in a Google Agent SDK hackathon. We abandoned it halfway because of scheduling and other challenges. I really wanted to materialize the vision, therefore started to tinker on it in spare time off and on. Yeah, it took a while, multiple redesigns from agent harness all the way to UX. And today, it is finally in a not-so-unusable state.
 
-The hosted demo has been retired. The code lives on in the [GitHub repo](https://github.com/hippogriff-ai/talent-promo).
+**Update (2026-11-21):** The hosted demo has been retired. The code lives on in the [GitHub repo](https://github.com/hippogriff-ai/talent-promo).
 
 ## Things I learned
 ### Workflow or agentic
