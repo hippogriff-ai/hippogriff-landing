@@ -19,12 +19,12 @@ export const metadata: Metadata = {
 
 const PROJECTS = [
   {
-    name: 'Remo',
-    desc: 'LiDAR-powered room redesign agent with shopping list support',
-    url: 'https://github.com/hippogriff-ai/remo',
+    name: 'Burgundy Wine Families',
+    desc: 'Pick a winemaker on the globe. Follow the marriages, inheritances, and sales that shaped Burgundy’s vineyards.',
+    url: 'https://burgfam.hippogriff.io/',
     hasAnimation: false,
-    image: '/remo.png',
-    cta: 'View',
+    image: '/burgundy-wine-families.png',
+    cta: 'Explore the atlas',
   },
   {
     name: 'TypeCraft',
@@ -33,12 +33,20 @@ const PROJECTS = [
     hasAnimation: true,
   },
   {
+    name: 'Remo',
+    desc: 'LiDAR-powered room redesign agent with shopping list support',
+    url: 'https://github.com/hippogriff-ai/remo',
+    hasAnimation: false,
+    image: '/remo.png',
+    cta: 'Repo',
+  },
+  {
     name: 'Talent Promo',
     desc: 'Resume writing agent that discovers your hidden strengths',
-    url: 'https://talent-promo.hippogriff.io',
+    url: 'https://github.com/hippogriff-ai/talent-promo',
     hasAnimation: false,
     image: '/talent-promo.png',
-    cta: 'Try',
+    cta: 'Repo',
   },
 ];
 
